@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Goal Framework</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1 class="main-title">Four Weeks · Four Months · Four Years</h1>
+            <div class="header-meta">
+                <input type="text" class="date-input" id="last-updated" placeholder="Last updated: __ / __ / ____">
+            </div>
+        </header>
+
+        <section class="principles-section">
+            <h2 class="section-label">Principles</h2>
+            <div class="principles-grid" id="principles-container">
+                <!-- Principles loaded from goals-config.js -->
+            </div>
+        </section>
+
+        <div class="timeline-divider"></div>
+
+        <section class="timeline-section" data-timeline="four-years">
+            <div class="timeline-header">
+                <h2 class="timeline-title">Four Years</h2>
+                <span class="timeline-subtitle">Update every four years</span>
+            </div>
+            <div class="goals-container" id="four-years-container">
+                <!-- Goals loaded from goals-config.js -->
+            </div>
+            <button class="add-goal-btn" onclick="addGoal('four-years')">
+                <span class="btn-icon">+</span>
+                <span class="btn-text">Add Goal</span>
+            </button>
+        </section>
+
+        <div class="timeline-divider"></div>
+
+        <section class="timeline-section" data-timeline="four-months">
+            <div class="timeline-header">
+                <h2 class="timeline-title">Four Months</h2>
+                <span class="timeline-subtitle">Update every four months</span>
+            </div>
+            <div class="goals-container" id="four-months-container">
+                <!-- Goals loaded from goals-config.js -->
+            </div>
+            <button class="add-goal-btn" onclick="addGoal('four-months')">
+                <span class="btn-icon">+</span>
+                <span class="btn-text">Add Goal</span>
+            </button>
+        </section>
+
+        <div class="timeline-divider"></div>
+
+        <section class="timeline-section" data-timeline="four-weeks">
+            <div class="timeline-header">
+                <h2 class="timeline-title">Four Weeks</h2>
+                <span class="timeline-subtitle">Update every four weeks</span>
+            </div>
+            <div class="goals-container" id="four-weeks-container">
+                <!-- Goals loaded from goals-config.js -->
+            </div>
+            <button class="add-goal-btn" onclick="addGoal('four-weeks')">
+                <span class="btn-icon">+</span>
+                <span class="btn-text">Add Goal</span>
+            </button>
+        </section>
+
+        <div class="export-section">
+            <button class="export-btn" onclick="exportToPDF()">
+                <span class="export-icon">↓</span>
+                <span class="export-text">Export to PDF</span>
+            </button>
+        </div>
+    </div>
+
+    <script src="goals-config.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
