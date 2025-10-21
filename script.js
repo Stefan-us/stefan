@@ -6,7 +6,8 @@ document.addEventListener('DOMContentLoaded', () => {
     loadGoals('four-weeks', GOALS_CONFIG.fourWeeks);
     loadLastUpdated();
     setupAutoResize();
-    setupScrollAnimations();
+    setupDragSelection();
+    setupChelseaEasterEgg();
 });
 
 // Load principles from config
@@ -16,19 +17,18 @@ function loadPrinciples() {
         const item = document.createElement('div');
         item.className = 'principle-item';
         item.innerHTML = `
-            <input type="text" class="principle-title" value="${principle.title}" placeholder="Principle name">
-            <textarea class="principle-desc" placeholder="Description">${principle.description}</textarea>
+            <input type="text" class="principle-title" value="${principle.title}" placeholder="principle name">
+            <textarea class="principle-desc" placeholder="description">${principle.description}</textarea>
         `;
         container.appendChild(item);
     });
 }
 
-// Load goals from config with staggered animation
+// Load goals from config
 function loadGoals(timeline, goals) {
     const container = document.getElementById(`${timeline}-container`);
-    goals.forEach((goal, index) => {
+    goals.forEach((goal) => {
         const row = createGoalRow(goal.text, goal.date, goal.notes);
-        row.style.animationDelay = `${index * 0.08 + 0.3}s`;
         container.appendChild(row);
     });
 }
@@ -38,92 +38,28 @@ function createGoalRow(text = '', date = '', notes = '') {
     const row = document.createElement('div');
     row.className = 'goal-row';
     row.innerHTML = `
-        <textarea class="goal-box" placeholder="Write your goal here...">${text}</textarea>
+        <textarea class="goal-box" placeholder="write your goal here...">${text}</textarea>
         <div class="notes-section">
-            <input type="text" class="date-field" placeholder="Date: __ / __ / __" value="${date}">
+            <input type="text" class="date-field" placeholder="date: __ / __ / __" value="${date}">
             <textarea class="notes-box" placeholder="notes">${notes}</textarea>
         </div>
     `;
     return row;
 }
 
-// Add new goal dynamically with smooth animation
-function addGoal(timeline) {
-    const container = document.getElementById(`${timeline}-container`);
-    const row = createGoalRow();
-
-    // Add with initial state
-    row.style.opacity = '0';
-    row.style.transform = 'translateX(-30px) scale(0.95)';
-    container.appendChild(row);
-
-    // Smooth entrance animation
-    requestAnimationFrame(() => {
-        setTimeout(() => {
-            row.style.transition = 'all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)';
-            row.style.opacity = '1';
-            row.style.transform = 'translateX(0) scale(1)';
-        }, 10);
-    });
-
-    // Auto-resize for new textareas
-    setupAutoResize();
-
-    // Focus on the new goal with slight delay
-    const goalBox = row.querySelector('.goal-box');
-    setTimeout(() => {
-        goalBox.focus();
-    }, 300);
-}
-
-// Auto-resize textareas as user types with smooth transition
+// Auto-resize textareas as user types
 function setupAutoResize() {
     const textareas = document.querySelectorAll('.goal-box');
 
     textareas.forEach(textarea => {
         const resize = () => {
             textarea.style.height = 'auto';
-            const newHeight = textarea.scrollHeight;
-            textarea.style.height = newHeight + 'px';
+            textarea.style.height = textarea.scrollHeight + 'px';
         };
 
         textarea.removeEventListener('input', resize);
         textarea.addEventListener('input', resize);
-
-        // Add focus and blur effects
-        textarea.addEventListener('focus', () => {
-            textarea.style.transition = 'all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)';
-        });
-
         resize(); // Initial resize
-    });
-}
-
-// Enhanced scroll animations for sections
-function setupScrollAnimations() {
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
-
-                // Stagger animate the goals within the section
-                const goalRows = entry.target.querySelectorAll('.goal-row');
-                goalRows.forEach((row, index) => {
-                    setTimeout(() => {
-                        row.style.opacity = '1';
-                        row.style.transform = 'translateX(0)';
-                    }, index * 50);
-                });
-            }
-        });
-    }, {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    });
-
-    document.querySelectorAll('.timeline-section').forEach(section => {
-        observer.observe(section);
     });
 }
 
@@ -134,7 +70,7 @@ function loadLastUpdated() {
     if (saved) {
         dateInput.value = saved;
     }
-    
+
     dateInput.addEventListener('change', () => {
         localStorage.setItem('lastUpdated', dateInput.value);
     });
@@ -142,15 +78,127 @@ function loadLastUpdated() {
 
 // Export to PDF
 function exportToPDF() {
-    // Show a nice animation
-    const btn = document.querySelector('.export-btn');
-    btn.style.transform = 'scale(0.95)';
-    setTimeout(() => {
-        btn.style.transform = 'scale(1)';
-    }, 200);
-    
-    // Trigger print dialog (which can save as PDF)
     window.print();
+}
+
+// Drag selection box
+function setupDragSelection() {
+    const selectionBox = document.getElementById('selection-box');
+    let startX, startY, isSelecting = false;
+
+    document.addEventListener('mousedown', (e) => {
+        // Only start selection on container background
+        if (e.target.classList.contains('container') || e.target.tagName === 'BODY') {
+            isSelecting = true;
+            startX = e.clientX;
+            startY = e.clientY;
+            selectionBox.style.left = startX + 'px';
+            selectionBox.style.top = startY + 'px';
+            selectionBox.style.width = '0px';
+            selectionBox.style.height = '0px';
+            selectionBox.style.display = 'block';
+        }
+    });
+
+    document.addEventListener('mousemove', (e) => {
+        if (!isSelecting) return;
+
+        const currentX = e.clientX;
+        const currentY = e.clientY;
+
+        const width = Math.abs(currentX - startX);
+        const height = Math.abs(currentY - startY);
+        const left = Math.min(currentX, startX);
+        const top = Math.min(currentY, startY);
+
+        selectionBox.style.left = left + 'px';
+        selectionBox.style.top = top + 'px';
+        selectionBox.style.width = width + 'px';
+        selectionBox.style.height = height + 'px';
+    });
+
+    document.addEventListener('mouseup', () => {
+        if (isSelecting) {
+            isSelecting = false;
+            setTimeout(() => {
+                selectionBox.style.display = 'none';
+            }, 200);
+        }
+    });
+}
+
+// Chelsea easter egg - blue fireworks
+function setupChelseaEasterEgg() {
+    let typedText = '';
+
+    document.addEventListener('keydown', (e) => {
+        // Build up the typed text
+        if (e.key.length === 1) {
+            typedText += e.key.toLowerCase();
+
+            // Keep only last 7 characters
+            if (typedText.length > 7) {
+                typedText = typedText.slice(-7);
+            }
+
+            // Check if "chelsea" was typed
+            if (typedText.includes('chelsea')) {
+                typedText = ''; // Reset
+                triggerFireworks();
+            }
+        } else if (e.key === 'Enter' && typedText.includes('chelsea')) {
+            typedText = '';
+            triggerFireworks();
+        }
+    });
+}
+
+function triggerFireworks() {
+    const colors = ['#4a90e2', '#5ba3f5', '#3a7bc8', '#6bb6ff'];
+    const fireworkCount = 8;
+
+    for (let i = 0; i < fireworkCount; i++) {
+        setTimeout(() => {
+            createFirework(colors);
+        }, i * 200);
+    }
+}
+
+function createFirework(colors) {
+    // Random position on screen
+    const x = Math.random() * window.innerWidth;
+    const y = Math.random() * (window.innerHeight * 0.5);
+
+    // Create firework burst
+    const particleCount = 30;
+    for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'firework-particle';
+        particle.style.left = x + 'px';
+        particle.style.top = y + 'px';
+        particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+
+        document.body.appendChild(particle);
+
+        // Random angle and distance
+        const angle = (Math.PI * 2 * i) / particleCount;
+        const velocity = 100 + Math.random() * 100;
+        const tx = Math.cos(angle) * velocity;
+        const ty = Math.sin(angle) * velocity;
+
+        // Animate particle
+        particle.animate([
+            { transform: 'translate(0, 0)', opacity: 1 },
+            { transform: `translate(${tx}px, ${ty}px)`, opacity: 0 }
+        ], {
+            duration: 1000 + Math.random() * 500,
+            easing: 'cubic-bezier(0, .9, .57, 1)',
+            fill: 'forwards'
+        });
+
+        // Remove particle after animation
+        setTimeout(() => particle.remove(), 1500);
+    }
 }
 
 // Smooth scroll behavior
@@ -164,111 +212,5 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 block: 'start'
             });
         }
-    });
-});
-
-// Add subtle parallax effect to header
-window.addEventListener('scroll', () => {
-    const scrolled = window.pageYOffset;
-    const header = document.querySelector('.header');
-    if (header) {
-        header.style.transform = `translateY(${scrolled * 0.3}px)`;
-        header.style.opacity = 1 - (scrolled / 500);
-    }
-});
-
-// Add ripple effect to dividers
-document.querySelectorAll('.timeline-divider').forEach(divider => {
-    divider.addEventListener('click', function(e) {
-        const ripple = document.createElement('div');
-        ripple.style.position = 'absolute';
-        ripple.style.width = '20px';
-        ripple.style.height = '20px';
-        ripple.style.borderRadius = '50%';
-        ripple.style.background = 'rgba(74, 144, 226, 0.4)';
-        ripple.style.transform = 'translate(-50%, -50%)';
-        ripple.style.pointerEvents = 'none';
-        ripple.style.animation = 'ripple 0.6s ease-out';
-        
-        const rect = this.getBoundingClientRect();
-        ripple.style.left = (e.clientX - rect.left) + 'px';
-        ripple.style.top = (e.clientY - rect.top) + 'px';
-        
-        this.style.position = 'relative';
-        this.appendChild(ripple);
-        
-        setTimeout(() => ripple.remove(), 600);
-    });
-});
-
-// Add ripple animation to CSS dynamically
-const style = document.createElement('style');
-style.textContent = `
-    @keyframes ripple {
-        from {
-            transform: translate(-50%, -50%) scale(0);
-            opacity: 1;
-        }
-        to {
-            transform: translate(-50%, -50%) scale(10);
-            opacity: 0;
-        }
-    }
-`;
-document.head.appendChild(style);
-
-// Add magnetic effect to buttons
-function setupMagneticButtons() {
-    const buttons = document.querySelectorAll('.add-goal-btn, .export-btn');
-
-    buttons.forEach(button => {
-        button.addEventListener('mousemove', (e) => {
-            const rect = button.getBoundingClientRect();
-            const x = e.clientX - rect.left - rect.width / 2;
-            const y = e.clientY - rect.top - rect.height / 2;
-
-            // Limit the magnetic effect
-            const distance = Math.sqrt(x * x + y * y);
-            const maxDistance = 50;
-
-            if (distance < maxDistance) {
-                const strength = 0.3;
-                button.style.transform = `translate(${x * strength}px, ${y * strength}px) translateY(-3px) scale(1.01)`;
-            }
-        });
-
-        button.addEventListener('mouseleave', () => {
-            button.style.transform = '';
-        });
-    });
-}
-
-// Setup enhanced interactions
-document.addEventListener('DOMContentLoaded', () => {
-    setupMagneticButtons();
-
-    // Add smooth parallax to principles section
-    const principlesSection = document.querySelector('.principles-section');
-    if (principlesSection) {
-        window.addEventListener('scroll', () => {
-            const scrolled = window.pageYOffset;
-            const rect = principlesSection.getBoundingClientRect();
-            const elementTop = rect.top + scrolled;
-            const elementVisible = rect.top < window.innerHeight && rect.bottom > 0;
-
-            if (elementVisible) {
-                const parallaxSpeed = 0.1;
-                const yPos = -(scrolled - elementTop) * parallaxSpeed;
-                principlesSection.style.transform = `translateY(${yPos}px) translateX(4px)`;
-            }
-        });
-    }
-
-    // Add enhanced focus indicators
-    const allInputs = document.querySelectorAll('input, textarea');
-    allInputs.forEach(input => {
-        input.addEventListener('focus', function() {
-            this.style.transition = 'all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)';
-        });
     });
 });
