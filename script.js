@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setupAutoResize();
     setupDragSelection();
     setupChelseaEasterEgg();
+    setupMariaEasterEgg();
 });
 
 // Load principles from config
@@ -199,6 +200,26 @@ function createFirework(colors) {
         // Remove particle after animation
         setTimeout(() => particle.remove(), 1500);
     }
+}
+
+// Maria easter egg - only visible at top of page
+function setupMariaEasterEgg() {
+    const mariaSecret = document.getElementById('maria-secret');
+
+    function updateMariaVisibility() {
+        // Only show when scrolled to top (within 50px)
+        if (window.scrollY <= 50) {
+            mariaSecret.style.display = 'block';
+        } else {
+            mariaSecret.style.display = 'none';
+        }
+    }
+
+    // Check on scroll
+    window.addEventListener('scroll', updateMariaVisibility);
+
+    // Initial check
+    updateMariaVisibility();
 }
 
 // Smooth scroll behavior

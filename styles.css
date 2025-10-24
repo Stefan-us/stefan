@@ -7,9 +7,10 @@
 :root {
     --soft-white: #f8f9fa;
     --pure-white: #ffffff;
-    --blue-accent: #4a90e2;
+    --blue-accent: #034694;
     --blue-light: #e3f2fd;
-    --blue-glow: rgba(74, 144, 226, 0.08);
+    --blue-glow: rgba(3, 70, 148, 0.08);
+    --cream-white: #f5f5dc;
     --text-primary: #1a1a1a;
     --text-secondary: #666;
     --text-tertiary: #999;
@@ -37,12 +38,23 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-    background: var(--blue-accent);
+    background: var(--cream-white);
     border-radius: 6px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: #3a7bc8;
+    background: #ede8cc;
+}
+
+/* Text selection color */
+::selection {
+    background: var(--cream-white);
+    color: var(--text-primary);
+}
+
+::-moz-selection {
+    background: var(--cream-white);
+    color: var(--text-primary);
 }
 
 .container {
@@ -149,7 +161,7 @@ body {
     background: transparent;
     font-family: inherit;
     width: 100%;
-    resize: vertical;
+    resize: none;
     min-height: 40px;
 }
 
@@ -257,9 +269,7 @@ body {
 
 /* Timeline Divider */
 .timeline-divider {
-    height: 2px;
-    background: linear-gradient(90deg, transparent 0%, var(--border-light) 50%, transparent 100%);
-    margin: 60px 0;
+    display: none;
 }
 
 /* Export Section */
@@ -328,28 +338,28 @@ body {
     }
 }
 
-/* Floating disorganized animation on timeline hover */
-.timeline-section:hover .goal-row {
+/* Floating disorganized animation on timeline title hover */
+.timeline-header:hover ~ .goals-container .goal-row {
     animation: float-away 3s ease-in-out infinite;
 }
 
-.timeline-section:hover .goal-row:nth-child(1) {
+.timeline-header:hover ~ .goals-container .goal-row:nth-child(1) {
     animation-delay: 0s;
 }
 
-.timeline-section:hover .goal-row:nth-child(2) {
+.timeline-header:hover ~ .goals-container .goal-row:nth-child(2) {
     animation-delay: 0.3s;
 }
 
-.timeline-section:hover .goal-row:nth-child(3) {
+.timeline-header:hover ~ .goals-container .goal-row:nth-child(3) {
     animation-delay: 0.6s;
 }
 
-.timeline-section:hover .goal-row:nth-child(4) {
+.timeline-header:hover ~ .goals-container .goal-row:nth-child(4) {
     animation-delay: 0.9s;
 }
 
-.timeline-section:hover .goal-row:nth-child(5) {
+.timeline-header:hover ~ .goals-container .goal-row:nth-child(5) {
     animation-delay: 1.2s;
 }
 
@@ -409,4 +419,22 @@ body {
         opacity: 0;
         transform: scale(0);
     }
+}
+
+/* Maria easter egg */
+.maria-secret {
+    position: fixed;
+    top: 20px;
+    right: 40px;
+    font-size: 14px;
+    color: transparent;
+    user-select: text;
+    pointer-events: none;
+    z-index: 10000;
+    font-family: inherit;
+}
+
+.maria-secret::selection {
+    background: var(--cream-white);
+    color: var(--text-primary);
 }
