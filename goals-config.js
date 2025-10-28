@@ -2,95 +2,91 @@
 // This is the only file you need to modify to update your goals
 
 const GOALS_CONFIG = {
-    // Your core principles (from Virgil Abloh and your own)
+    // Your core principles
     principles: [
         {
-            title: "The 3% Rule",
-            description: "You only need to change something by 3% to make it new and your own. Small adjustments create distinction."
+            title: "put yourself in uncomfortable situations.",
+            description: "if you don't want to do something, do it. you'll never regret pushing yourself to socialize, to go out of your comfort zone. force yourself to do it."
         },
         {
-            title: "Find Your Signature",
-            description: "Develop a personal style and approach that's unmistakably yours. Let your work carry your fingerprint."
+            title: "be different.",
+            description: "everyone has the same path, same story. what do you do to set yourself apart? push yourself to be different, to do things differently, to be remembered."
         },
         {
-            title: "Question Everything",
-            description: "Don't accept the way things are. Ask why, challenge conventions, and reimagine what's possible."
+            title: "the 3% rule.",
+            description: "you only need to change something by 3% to make it new and your own. small adjustments create distinction."
         },
         {
-            title: "Your Own Principle",
-            description: "Add your own principle here. What matters most to you?"
-        }
-    ],
-
-    // Four Year Goals (Update every 4 years)
-    fourYears: [
-        {
-            text: "Build a successful career in my chosen field",
-            date: "2025",
-            notes: "Focus on skill development"
+            title: "question everything.",
+            description: "don't accept the way things are. ask why, challenge conventions, and reimagine what's possible."
         },
         {
-            text: "Establish financial independence",
-            date: "2025-2029",
-            notes: "Savings and investments"
+            title: "discipline, not motivation.",
+            description: "you won't be motivated every day, but stay disciplined. follow your goals, remain consistent. that's what matters."
         },
         {
-            text: "Make a meaningful impact in my community",
-            date: "2029",
-            notes: "Volunteer and mentorship"
-        }
-    ],
-
-    // Four Month Goals (Update every 4 months)
-    fourMonths: [
-        {
-            text: "Complete a major project or milestone",
-            date: "Feb 2025",
-            notes: "Define specifics"
+            title: "stay close to faith.",
+            description: "remember God in tough times and happy times. remember when God gave you strength, and remember to give back."
         },
         {
-            text: "Learn a new skill or technology",
-            date: "Feb-May 2025",
-            notes: "Online course"
+            title: "calculate risks.",
+            description: "don't take random risks. take calculated ones. think it through, then commit."
         },
         {
-            text: "Build or strengthen key relationships",
-            date: "Q1 2025",
-            notes: "Network actively"
-        },
-        {
-            text: "Improve health and fitness routine",
-            date: "Jan-Apr 2025",
-            notes: "3x per week"
+            title: "be the best version of yourself.",
+            description: "always strive to be your best self. not the best of everyone, but your personal best. stay rooted while you grow."
         }
     ],
 
     // Four Week Goals (Update every 4 weeks)
     fourWeeks: [
         {
-            text: "Complete weekly tasks and deliverables",
-            date: "Week 1",
-            notes: "Stay organized"
+            text: "complete weekly tasks and deliverables",
+            date: "week 1",
+            notes: "stay organized"
         },
         {
-            text: "Make progress on current projects",
-            date: "Week 2",
-            notes: "Track milestones"
+            text: "make progress on current projects",
+            date: "week 2",
+            notes: "track milestones"
         },
         {
-            text: "Practice new skills daily",
-            date: "Week 3",
+            text: "practice new skills daily",
+            date: "week 3",
             notes: "30 min/day"
         },
         {
-            text: "Review and reflect on progress",
-            date: "Week 4",
-            notes: "End of month"
+            text: "review and reflect on progress",
+            date: "week 4",
+            notes: "end of month"
+        }
+    ],
+
+    // Four Month Goals (Update every 4 months)
+    fourMonths: [
+        {
+            text: "complete a major project or milestone",
+            date: "feb 2025",
+            notes: "define specifics"
         },
         {
-            text: "Plan for next month",
-            date: "Week 4",
-            notes: "Set new goals"
+            text: "learn a new skill or technology",
+            date: "feb-may 2025",
+            notes: "online course"
+        },
+        {
+            text: "build or strengthen key relationships",
+            date: "q1 2025",
+            notes: "network actively"
+        }
+    ],
+
+    // Four Year Goals (Update every 4 years)
+    fourYears: [
+        {
+            text: "• learn greek conversationally - read and speak at a strong level.\n• be the best version of yourself.\n• start a business that makes as much as your salary - expand, try new things, take risks.\n• build your dream body - be in the best shape ever.\n• have a defined style - the way you look, treat yourself, your character.\n• strengthen the relationships you have - value those around you.\n• create new relationships with people that really matter.",
+            date: "2030",
+            notes: "four year vision"
         }
     ]
 };

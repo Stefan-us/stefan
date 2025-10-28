@@ -147,6 +147,8 @@ body {
     background: transparent;
     font-family: inherit;
     width: 100%;
+    pointer-events: none;
+    user-select: none;
 }
 
 .principle-title:focus {
@@ -163,6 +165,8 @@ body {
     width: 100%;
     resize: none;
     min-height: 40px;
+    pointer-events: none;
+    user-select: none;
 }
 
 .principle-desc:focus {
@@ -338,45 +342,7 @@ body {
     }
 }
 
-/* Floating disorganized animation on timeline title hover */
-.timeline-header:hover ~ .goals-container .goal-row {
-    animation: float-away 3s ease-in-out infinite;
-}
-
-.timeline-header:hover ~ .goals-container .goal-row:nth-child(1) {
-    animation-delay: 0s;
-}
-
-.timeline-header:hover ~ .goals-container .goal-row:nth-child(2) {
-    animation-delay: 0.3s;
-}
-
-.timeline-header:hover ~ .goals-container .goal-row:nth-child(3) {
-    animation-delay: 0.6s;
-}
-
-.timeline-header:hover ~ .goals-container .goal-row:nth-child(4) {
-    animation-delay: 0.9s;
-}
-
-.timeline-header:hover ~ .goals-container .goal-row:nth-child(5) {
-    animation-delay: 1.2s;
-}
-
-@keyframes float-away {
-    0%, 100% {
-        transform: translate(0, 0) rotate(0deg);
-    }
-    25% {
-        transform: translate(5px, -3px) rotate(0.5deg);
-    }
-    50% {
-        transform: translate(-3px, 5px) rotate(-0.5deg);
-    }
-    75% {
-        transform: translate(7px, 2px) rotate(0.3deg);
-    }
-}
+/* Removed floating animation */
 
 /* Drag selection box */
 .selection-box {
