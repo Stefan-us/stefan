@@ -78,6 +78,61 @@
         </div>
     </div>
 
+    <!-- Historical Logs Sidebar -->
+    <div class="history-sidebar" id="history-sidebar">
+        <div class="history-tabs">
+            <button class="history-tab home-tab active" data-tab="home">⌂</button>
+            <button class="history-tab" data-tab="four-weeks">four weeks.</button>
+            <button class="history-tab" data-tab="four-months">four months.</button>
+            <button class="history-tab" data-tab="four-years">four years.</button>
+        </div>
+        <div class="history-toggle" id="history-toggle">
+            <span id="history-toggle-text">previous ones</span>
+            <span id="history-toggle-icon">▲</span>
+        </div>
+        <div class="history-content" id="history-content">
+            <div class="history-panel active" id="history-home">
+                <div style="text-align: center; padding: 40px; background: linear-gradient(to bottom, rgba(3, 70, 148, 0.02), transparent);">
+                    <h3 style="color: var(--blue-accent); margin-bottom: 16px; font-size: 20px;">⌂ historical logs.</h3>
+                    <p style="color: var(--text-secondary); font-size: 14px; line-height: 1.8;">
+                        select a timeline above to view previous entries.<br>
+                        your goals are automatically archived here when you update them.
+                    </p>
+                </div>
+            </div>
+            <div class="history-panel" id="history-four-weeks" style="display: none;">
+                <!-- Historical four weeks goals will be loaded here -->
+                <div style="text-align: center; padding: 40px; background: rgba(255, 200, 100, 0.05);">
+                    <h3 style="color: var(--blue-accent); margin-bottom: 16px; font-size: 18px;">📅 four weeks history</h3>
+                    <p class="history-empty">no previous entries yet.</p>
+                    <p style="color: var(--text-tertiary); font-size: 12px; margin-top: 16px;">
+                        weekly goals you've completed will appear here.
+                    </p>
+                </div>
+            </div>
+            <div class="history-panel" id="history-four-months" style="display: none;">
+                <!-- Historical four months goals will be loaded here -->
+                <div style="text-align: center; padding: 40px; background: rgba(100, 200, 255, 0.05);">
+                    <h3 style="color: var(--blue-accent); margin-bottom: 16px; font-size: 18px;">📊 four months history</h3>
+                    <p class="history-empty">no previous entries yet.</p>
+                    <p style="color: var(--text-tertiary); font-size: 12px; margin-top: 16px;">
+                        monthly goals you've completed will appear here.
+                    </p>
+                </div>
+            </div>
+            <div class="history-panel" id="history-four-years" style="display: none;">
+                <!-- Historical four years goals will be loaded here -->
+                <div style="text-align: center; padding: 40px; background: rgba(200, 100, 255, 0.05);">
+                    <h3 style="color: var(--blue-accent); margin-bottom: 16px; font-size: 18px;">🎯 four years history</h3>
+                    <p class="history-empty">no previous entries yet.</p>
+                    <p style="color: var(--text-tertiary); font-size: 12px; margin-top: 16px;">
+                        long-term goals you've completed will appear here.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="selection-box" id="selection-box"></div>
     <div class="maria-secret" id="maria-secret">maria</div>
 
