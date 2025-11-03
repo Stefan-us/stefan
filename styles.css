@@ -30,7 +30,7 @@ body {
 
 /* Custom scrollbar */
 ::-webkit-scrollbar {
-    width: 12px;
+    width: 8px;
 }
 
 ::-webkit-scrollbar-track {
@@ -39,7 +39,7 @@ body {
 
 ::-webkit-scrollbar-thumb {
     background: #b8b8b8;
-    border-radius: 6px;
+    border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
@@ -402,8 +402,8 @@ body {
     left: 0;
     right: 0;
     background: var(--pure-white);
-    border-top: 2px solid var(--border-light);
-    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.08);
+    border-top: 1px solid var(--border-light);
+    box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.03);
     z-index: 1000;
     max-height: 60vh;
     transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -448,13 +448,13 @@ body {
     display: flex;
     gap: 8px;
     background: var(--soft-white);
-    padding: 20px 40px;
+    padding: 24px 40px 12px 40px;
     border-bottom: 1px solid var(--border-light);
-    align-items: center;
+    align-items: flex-end;
 }
 
 .history-tab {
-    padding: 12px 24px;
+    padding: 10px 24px 14px 24px;
     background: rgba(255, 255, 255, 0.5);
     border: none;
     border-bottom: 3px solid transparent;
