@@ -38,12 +38,12 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-    background: var(--cream-white);
+    background: #fafafa;
     border-radius: 6px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: #ede8cc;
+    background: #f0f0f0;
 }
 
 /* Text selection color */
@@ -92,17 +92,8 @@ body {
     border-bottom: 1px solid transparent;
     font-family: inherit;
     padding: 4px 0;
-    transition: all 0.3s ease;
-}
-
-.date-input:hover {
-    color: var(--blue-accent);
-}
-
-.date-input:focus {
-    outline: none;
-    border-bottom-color: var(--blue-accent);
-    color: var(--text-primary);
+    pointer-events: none;
+    user-select: none;
 }
 
 /* Principles Section */
@@ -401,4 +392,138 @@ body {
 .maria-secret::selection {
     background: var(--cream-white);
     color: var(--text-primary);
+}
+
+/* Historical Logs Sidebar */
+.history-sidebar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: var(--pure-white);
+    border-top: 2px solid var(--border-light);
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.08);
+    z-index: 1000;
+    max-height: 60vh;
+    transition: transform 0.4s ease;
+}
+
+.history-sidebar.collapsed {
+    transform: translateY(calc(100% - 50px));
+}
+
+.history-toggle {
+    padding: 15px 40px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--pure-white);
+    border-bottom: 1px solid var(--border-light);
+    transition: background 0.2s ease;
+}
+
+.history-toggle:hover {
+    background: var(--soft-white);
+}
+
+#history-toggle-text {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+#history-toggle-icon {
+    font-size: 12px;
+    color: var(--text-secondary);
+    transition: transform 0.4s ease;
+}
+
+.history-sidebar.collapsed #history-toggle-icon {
+    transform: rotate(180deg);
+}
+
+.history-tabs {
+    display: flex;
+    gap: 0;
+    background: var(--soft-white);
+    padding: 0 40px;
+    border-bottom: 1px solid var(--border-light);
+}
+
+.history-tab {
+    padding: 12px 24px;
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid transparent;
+    color: var(--text-secondary);
+    font-family: inherit;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.history-tab:hover {
+    color: var(--text-primary);
+    background: rgba(3, 70, 148, 0.05);
+}
+
+.history-tab.active {
+    color: var(--blue-accent);
+    border-bottom-color: var(--blue-accent);
+}
+
+.history-content {
+    padding: 30px 40px;
+    max-height: calc(60vh - 120px);
+    overflow-y: auto;
+}
+
+.history-panel {
+    display: none;
+}
+
+.history-panel.active {
+    display: block;
+}
+
+.history-empty {
+    text-align: center;
+    color: var(--text-tertiary);
+    font-size: 14px;
+    padding: 40px;
+}
+
+.history-card {
+    background: var(--soft-white);
+    border-left: 3px solid var(--blue-accent);
+    padding: 20px;
+    margin-bottom: 16px;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+}
+
+.history-card:hover {
+    box-shadow: var(--shadow-sm);
+    transform: translateX(4px);
+}
+
+.history-card-date {
+    font-size: 12px;
+    color: var(--text-tertiary);
+    margin-bottom: 12px;
+    font-weight: 500;
+}
+
+.history-card-content {
+    font-size: 14px;
+    color: var(--text-primary);
+    line-height: 1.6;
+}
+
+.history-card-notes {
+    font-size: 13px;
+    color: var(--text-secondary);
+    margin-top: 8px;
+    font-style: italic;
 }

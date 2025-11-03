@@ -78,6 +78,33 @@
         </div>
     </div>
 
+    <!-- Historical Logs Sidebar -->
+    <div class="history-sidebar" id="history-sidebar">
+        <div class="history-tabs">
+            <button class="history-tab active" data-tab="four-weeks" onclick="switchHistoryTab('four-weeks')">four weeks.</button>
+            <button class="history-tab" data-tab="four-months" onclick="switchHistoryTab('four-months')">four months.</button>
+            <button class="history-tab" data-tab="four-years" onclick="switchHistoryTab('four-years')">four years.</button>
+        </div>
+        <div class="history-toggle" onclick="toggleHistorySidebar()">
+            <span id="history-toggle-text">previous ones</span>
+            <span id="history-toggle-icon">▲</span>
+        </div>
+        <div class="history-content" id="history-content">
+            <div class="history-panel" id="history-four-weeks">
+                <!-- Historical four weeks goals will be loaded here -->
+                <p class="history-empty">no previous entries yet.</p>
+            </div>
+            <div class="history-panel" id="history-four-months" style="display: none;">
+                <!-- Historical four months goals will be loaded here -->
+                <p class="history-empty">no previous entries yet.</p>
+            </div>
+            <div class="history-panel" id="history-four-years" style="display: none;">
+                <!-- Historical four years goals will be loaded here -->
+                <p class="history-empty">no previous entries yet.</p>
+            </div>
+        </div>
+    </div>
+
     <div class="selection-box" id="selection-box"></div>
     <div class="maria-secret" id="maria-secret">maria</div>
 

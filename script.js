@@ -9,6 +9,8 @@ document.addEventListener('DOMContentLoaded', () => {
     setupDragSelection();
     setupChelseaEasterEgg();
     setupMariaEasterEgg();
+    initHistorySidebar();
+    loadHistoricalLogs();
 });
 
 // Load principles from config
@@ -235,3 +237,86 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         }
     });
 });
+
+// Historical Logs Sidebar Functions
+function initHistorySidebar() {
+    const sidebar = document.getElementById('history-sidebar');
+    sidebar.classList.add('collapsed');
+}
+
+function toggleHistorySidebar() {
+    const sidebar = document.getElementById('history-sidebar');
+    sidebar.classList.toggle('collapsed');
+}
+
+function switchHistoryTab(tabName) {
+    // Update tab buttons
+    document.querySelectorAll('.history-tab').forEach(tab => {
+        tab.classList.remove('active');
+    });
+    document.querySelector(`[data-tab="${tabName}"]`).classList.add('active');
+
+    // Update panels
+    document.querySelectorAll('.history-panel').forEach(panel => {
+        panel.classList.remove('active');
+    });
+    document.getElementById(`history-${tabName}`).classList.add('active');
+}
+
+function loadHistoricalLogs() {
+    // Load from localStorage
+    const history = {
+        'four-weeks': JSON.parse(localStorage.getItem('history-four-weeks') || '[]'),
+        'four-months': JSON.parse(localStorage.getItem('history-four-months') || '[]'),
+        'four-years': JSON.parse(localStorage.getItem('history-four-years') || '[]')
+    };
+
+    // Render each history panel
+    Object.keys(history).forEach(timeline => {
+        renderHistoryPanel(timeline, history[timeline]);
+    });
+}
+
+function renderHistoryPanel(timeline, entries) {
+    const panel = document.getElementById(`history-${timeline}`);
+
+    if (entries.length === 0) {
+        panel.innerHTML = '<p class="history-empty">no previous entries yet.</p>';
+        return;
+    }
+
+    panel.innerHTML = entries.map((entry, index) => `
+        <div class="history-card">
+            <div class="history-card-date">archived: ${entry.archived || 'unknown date'}</div>
+            <div class="history-card-content">${entry.text || ''}</div>
+            ${entry.notes ? `<div class="history-card-notes">${entry.notes}</div>` : ''}
+        </div>
+    `).join('');
+}
+
+function archiveCurrentGoals(timeline) {
+    // Get current goals
+    const container = document.getElementById(`${timeline}-container`);
+    const goalBoxes = container.querySelectorAll('.goal-box');
+
+    const goals = Array.from(goalBoxes).map(box => ({
+        text: box.value,
+        archived: new Date().toLocaleDateString()
+    }));
+
+    // Load existing history
+    const historyKey = `history-${timeline}`;
+    const history = JSON.parse(localStorage.getItem(historyKey) || '[]');
+
+    // Add current goals to history
+    history.unshift(...goals);
+
+    // Save to localStorage
+    localStorage.setItem(historyKey, JSON.stringify(history));
+
+    // Re-render history panel
+    renderHistoryPanel(timeline, history);
+}
+
+// Make archive function available globally for manual archiving
+window.archiveCurrentGoals = archiveCurrentGoals;
