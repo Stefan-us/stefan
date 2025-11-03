@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setupMariaEasterEgg();
     initHistorySidebar();
     loadHistoricalLogs();
+    setupHistoryTabListeners();
 });
 
 // Load principles from config
@@ -256,6 +257,9 @@ function switchHistoryTab(tabName) {
     const activeTab = document.querySelector(`[data-tab="${tabName}"]`);
     if (activeTab) {
         activeTab.classList.add('active');
+        console.log('Activated tab:', tabName);
+    } else {
+        console.error('Tab not found:', tabName);
     }
 
     // Update panels
@@ -267,6 +271,32 @@ function switchHistoryTab(tabName) {
     if (activePanel) {
         activePanel.classList.add('active');
         activePanel.style.display = 'block';
+        console.log('Showing panel:', `history-${tabName}`);
+    } else {
+        console.error('Panel not found:', `history-${tabName}`);
+    }
+}
+
+// Setup event listeners for tabs and toggle
+function setupHistoryTabListeners() {
+    // Tab buttons
+    document.querySelectorAll('.history-tab').forEach(tab => {
+        tab.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            const tabName = this.getAttribute('data-tab');
+            console.log('Tab clicked:', tabName);
+            switchHistoryTab(tabName);
+        });
+    });
+
+    // Toggle button
+    const toggleBtn = document.getElementById('history-toggle');
+    if (toggleBtn) {
+        toggleBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            toggleHistorySidebar();
+        });
     }
 }
 

@@ -38,12 +38,12 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #fafafa;
+    background: #b8b8b8;
     border-radius: 6px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: #f0f0f0;
+    background: #a0a0a0;
 }
 
 /* Text selection color */
@@ -426,7 +426,6 @@ body {
 
 .history-toggle:hover {
     background: var(--soft-white);
-    transform: translateY(-2px);
 }
 
 #history-toggle-text {
@@ -449,12 +448,13 @@ body {
     display: flex;
     gap: 8px;
     background: var(--soft-white);
-    padding: 12px 40px;
+    padding: 20px 40px;
     border-bottom: 1px solid var(--border-light);
+    align-items: center;
 }
 
 .history-tab {
-    padding: 10px 20px;
+    padding: 12px 24px;
     background: rgba(255, 255, 255, 0.5);
     border: none;
     border-bottom: 3px solid transparent;
@@ -462,15 +462,13 @@ body {
     font-family: inherit;
     font-size: 13px;
     cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.2s ease;
     border-radius: 4px 4px 0 0;
-    position: relative;
 }
 
 .history-tab:hover {
     color: var(--text-primary);
-    background: rgba(255, 255, 255, 0.8);
-    transform: translateY(-2px);
+    background: rgba(255, 255, 255, 0.9);
 }
 
 .history-tab.active {
