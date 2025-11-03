@@ -147,8 +147,6 @@ body {
     background: transparent;
     font-family: inherit;
     width: 100%;
-    pointer-events: none;
-    user-select: none;
 }
 
 .principle-title:focus {
@@ -165,8 +163,6 @@ body {
     width: 100%;
     resize: none;
     min-height: 40px;
-    pointer-events: none;
-    user-select: none;
 }
 
 .principle-desc:focus {
@@ -223,6 +219,8 @@ body {
     color: var(--text-primary);
     resize: none;
     transition: border-right-color 0.2s ease;
+    pointer-events: none;
+    user-select: none;
 }
 
 .goal-box:hover {
