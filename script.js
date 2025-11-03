@@ -69,14 +69,11 @@ function setupAutoResize() {
 // Load last updated date
 function loadLastUpdated() {
     const dateInput = document.getElementById('last-updated');
-    const saved = localStorage.getItem('lastUpdated');
-    if (saved) {
-        dateInput.value = saved;
-    }
 
-    dateInput.addEventListener('change', () => {
-        localStorage.setItem('lastUpdated', dateInput.value);
-    });
+    // Set to current date in format MM/DD/YYYY
+    const today = new Date();
+    const formattedDate = `${String(today.getMonth() + 1).padStart(2, '0')}/${String(today.getDate()).padStart(2, '0')}/${today.getFullYear()}`;
+    dateInput.value = `last updated: ${formattedDate}`;
 }
 
 // Export to PDF

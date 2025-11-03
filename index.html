@@ -81,7 +81,8 @@
     <!-- Historical Logs Sidebar -->
     <div class="history-sidebar" id="history-sidebar">
         <div class="history-tabs">
-            <button class="history-tab active" data-tab="four-weeks" onclick="switchHistoryTab('four-weeks')">four weeks.</button>
+            <button class="history-tab home-tab active" data-tab="home" onclick="switchHistoryTab('home')">⌂ home</button>
+            <button class="history-tab" data-tab="four-weeks" onclick="switchHistoryTab('four-weeks')">four weeks.</button>
             <button class="history-tab" data-tab="four-months" onclick="switchHistoryTab('four-months')">four months.</button>
             <button class="history-tab" data-tab="four-years" onclick="switchHistoryTab('four-years')">four years.</button>
         </div>
@@ -90,15 +91,24 @@
             <span id="history-toggle-icon">▲</span>
         </div>
         <div class="history-content" id="history-content">
+            <div class="history-panel active" id="history-home">
+                <div style="text-align: center; padding: 40px;">
+                    <h3 style="color: var(--blue-accent); margin-bottom: 16px; font-size: 20px;">historical logs.</h3>
+                    <p style="color: var(--text-secondary); font-size: 14px; line-height: 1.8;">
+                        select a timeline above to view previous entries.<br>
+                        your goals are automatically archived here when you update them.
+                    </p>
+                </div>
+            </div>
             <div class="history-panel" id="history-four-weeks">
                 <!-- Historical four weeks goals will be loaded here -->
                 <p class="history-empty">no previous entries yet.</p>
             </div>
-            <div class="history-panel" id="history-four-months" style="display: none;">
+            <div class="history-panel" id="history-four-months">
                 <!-- Historical four months goals will be loaded here -->
                 <p class="history-empty">no previous entries yet.</p>
             </div>
-            <div class="history-panel" id="history-four-years" style="display: none;">
+            <div class="history-panel" id="history-four-years">
                 <!-- Historical four years goals will be loaded here -->
                 <p class="history-empty">no previous entries yet.</p>
             </div>
