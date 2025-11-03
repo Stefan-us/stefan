@@ -402,3 +402,151 @@ body {
     background: var(--cream-white);
     color: var(--text-primary);
 }
+
+/* Bottom bar for historical views */
+.bottom-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: var(--pure-white);
+    border-top: 2px solid var(--border-light);
+    box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.08);
+    z-index: 9000;
+    padding: 16px 20px;
+}
+
+.bottom-bar-content {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.view-info {
+    flex-shrink: 0;
+}
+
+.view-label {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-primary);
+    padding: 8px 16px;
+    background: var(--blue-light);
+    border-radius: 20px;
+    border: 1px solid var(--blue-accent);
+}
+
+.bottom-bar-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.bottom-btn {
+    background: var(--soft-white);
+    color: var(--text-primary);
+    border: 1px solid var(--border-light);
+    padding: 8px 16px;
+    font-size: 13px;
+    font-family: inherit;
+    font-weight: 500;
+    border-radius: 6px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.bottom-btn:hover {
+    background: var(--blue-light);
+    border-color: var(--blue-accent);
+}
+
+.bottom-btn.active {
+    background: var(--blue-accent);
+    color: white;
+    border-color: var(--blue-accent);
+}
+
+.save-snapshot-btn {
+    background: var(--blue-accent);
+    color: white;
+    border-color: var(--blue-accent);
+}
+
+.save-snapshot-btn:hover {
+    background: #3a7bc8;
+}
+
+.snapshot-list {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.snapshot-btn {
+    background: var(--soft-white);
+    color: var(--text-primary);
+    border: 1px solid var(--border-light);
+    padding: 6px 12px;
+    font-size: 12px;
+    font-family: inherit;
+    font-weight: 500;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.snapshot-btn:hover {
+    background: var(--blue-light);
+    border-color: var(--blue-accent);
+}
+
+.snapshot-btn.active {
+    background: var(--blue-accent);
+    color: white;
+    border-color: var(--blue-accent);
+}
+
+.snapshot-delete {
+    margin-left: 4px;
+    font-size: 14px;
+    opacity: 0.6;
+    transition: opacity 0.2s ease;
+}
+
+.snapshot-btn:hover .snapshot-delete {
+    opacity: 1;
+}
+
+/* Adjust body padding for bottom bar */
+body {
+    padding-bottom: 80px;
+}
+
+@media (max-width: 768px) {
+    .bottom-bar-content {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+    }
+
+    .bottom-bar-actions {
+        justify-content: center;
+    }
+
+    .view-label {
+        text-align: center;
+    }
+}
