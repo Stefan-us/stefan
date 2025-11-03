@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initHistorySidebar();
     loadHistoricalLogs();
     setupHistoryTabListeners();
+    loadSnapshots();
 });
 
 // Load principles from config
@@ -236,128 +237,260 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Historical Logs Sidebar Functions
-function initHistorySidebar() {
-    const sidebar = document.getElementById('history-sidebar');
-    sidebar.classList.add('collapsed');
-}
+// ========== HISTORICAL SNAPSHOTS FUNCTIONALITY ==========
 
-function toggleHistorySidebar() {
-    const sidebar = document.getElementById('history-sidebar');
-    sidebar.classList.toggle('collapsed');
-}
+let currentSnapshotId = null;
 
-function switchHistoryTab(tabName) {
-    console.log('Switching to tab:', tabName); // Debug log
-
-    // Update tab buttons
-    document.querySelectorAll('.history-tab').forEach(tab => {
-        tab.classList.remove('active');
-    });
-    const activeTab = document.querySelector(`[data-tab="${tabName}"]`);
-    if (activeTab) {
-        activeTab.classList.add('active');
-        console.log('Activated tab:', tabName);
-    } else {
-        console.error('Tab not found:', tabName);
-    }
-
-    // Update panels
-    document.querySelectorAll('.history-panel').forEach(panel => {
-        panel.classList.remove('active');
-        panel.style.display = 'none';
-    });
-    const activePanel = document.getElementById(`history-${tabName}`);
-    if (activePanel) {
-        activePanel.classList.add('active');
-        activePanel.style.display = 'block';
-        console.log('Showing panel:', `history-${tabName}`);
-    } else {
-        console.error('Panel not found:', `history-${tabName}`);
-    }
-}
-
-// Setup event listeners for tabs and toggle
-function setupHistoryTabListeners() {
-    // Tab buttons
-    document.querySelectorAll('.history-tab').forEach(tab => {
-        tab.addEventListener('click', function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            const tabName = this.getAttribute('data-tab');
-            console.log('Tab clicked:', tabName);
-            switchHistoryTab(tabName);
-        });
-    });
-
-    // Toggle button
-    const toggleBtn = document.getElementById('history-toggle');
-    if (toggleBtn) {
-        toggleBtn.addEventListener('click', function(e) {
-            e.preventDefault();
-            toggleHistorySidebar();
-        });
-    }
-}
-
-// Make functions globally accessible
-window.toggleHistorySidebar = toggleHistorySidebar;
-window.switchHistoryTab = switchHistoryTab;
-
-function loadHistoricalLogs() {
-    // Load from localStorage
-    const history = {
-        'four-weeks': JSON.parse(localStorage.getItem('history-four-weeks') || '[]'),
-        'four-months': JSON.parse(localStorage.getItem('history-four-months') || '[]'),
-        'four-years': JSON.parse(localStorage.getItem('history-four-years') || '[]')
+// Save current state as a snapshot
+function saveSnapshot() {
+    const snapshot = {
+        id: Date.now(),
+        timestamp: new Date().toISOString(),
+        date: new Date().toLocaleString(),
+        data: {
+            principles: getPrinciplesData(),
+            fourWeeks: getGoalsData('four-weeks'),
+            fourMonths: getGoalsData('four-months'),
+            fourYears: getGoalsData('four-years'),
+            lastUpdated: document.getElementById('last-updated').value
+        }
     };
 
-    // Render each history panel
-    Object.keys(history).forEach(timeline => {
-        renderHistoryPanel(timeline, history[timeline]);
+    // Get existing snapshots
+    const snapshots = getSnapshots();
+    snapshots.push(snapshot);
+
+    // Save to localStorage
+    localStorage.setItem('goalSnapshots', JSON.stringify(snapshots));
+
+    // Refresh the snapshot list
+    loadSnapshots();
+
+    // Show confirmation
+    showNotification('Snapshot saved successfully!');
+}
+
+// Get all snapshots from localStorage
+function getSnapshots() {
+    const stored = localStorage.getItem('goalSnapshots');
+    return stored ? JSON.parse(stored) : [];
+}
+
+// Load and display all snapshots
+function loadSnapshots() {
+    const snapshots = getSnapshots();
+    const snapshotList = document.getElementById('snapshot-list');
+
+    snapshotList.innerHTML = '';
+
+    snapshots.forEach((snapshot, index) => {
+        const btn = document.createElement('button');
+        btn.className = 'snapshot-btn';
+        if (currentSnapshotId === snapshot.id) {
+            btn.classList.add('active');
+        }
+
+        const dateStr = new Date(snapshot.timestamp).toLocaleDateString();
+        const timeStr = new Date(snapshot.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+        btn.innerHTML = `
+            <span>${dateStr} ${timeStr}</span>
+            <span class="snapshot-delete" onclick="deleteSnapshot(event, ${snapshot.id})">×</span>
+        `;
+
+        btn.onclick = (e) => {
+            if (!e.target.classList.contains('snapshot-delete')) {
+                loadSnapshot(snapshot.id);
+            }
+        };
+
+        snapshotList.appendChild(btn);
     });
 }
 
-function renderHistoryPanel(timeline, entries) {
-    const panel = document.getElementById(`history-${timeline}`);
+// Load a specific snapshot
+function loadSnapshot(snapshotId) {
+    const snapshots = getSnapshots();
+    const snapshot = snapshots.find(s => s.id === snapshotId);
 
-    if (entries.length === 0) {
-        panel.innerHTML = '<p class="history-empty">no previous entries yet.</p>';
+    if (!snapshot) {
+        console.error('Snapshot not found');
         return;
     }
 
-    panel.innerHTML = entries.map((entry, index) => `
-        <div class="history-card">
-            <div class="history-card-date">archived: ${entry.archived || 'unknown date'}</div>
-            <div class="history-card-content">${entry.text || ''}</div>
-            ${entry.notes ? `<div class="history-card-notes">${entry.notes}</div>` : ''}
-        </div>
-    `).join('');
+    currentSnapshotId = snapshotId;
+
+    // Load the snapshot data
+    loadPrinciplesFromData(snapshot.data.principles);
+    loadGoalsFromData('four-weeks', snapshot.data.fourWeeks);
+    loadGoalsFromData('four-months', snapshot.data.fourMonths);
+    loadGoalsFromData('four-years', snapshot.data.fourYears);
+
+    if (snapshot.data.lastUpdated) {
+        document.getElementById('last-updated').value = snapshot.data.lastUpdated;
+    }
+
+    // Update view label
+    const dateStr = new Date(snapshot.timestamp).toLocaleString();
+    document.getElementById('view-label').textContent = `Viewing: ${dateStr}`;
+
+    // Update active states
+    loadSnapshots();
 }
 
-function archiveCurrentGoals(timeline) {
-    // Get current goals
+// Load current/live view
+function loadCurrentView() {
+    currentSnapshotId = null;
+
+    // Reload from config
+    loadPrinciplesFromData(GOALS_CONFIG.principles);
+    loadGoalsFromData('four-weeks', GOALS_CONFIG.fourWeeks);
+    loadGoalsFromData('four-months', GOALS_CONFIG.fourMonths);
+    loadGoalsFromData('four-years', GOALS_CONFIG.fourYears);
+
+    // Restore last updated from localStorage
+    const saved = localStorage.getItem('lastUpdated');
+    if (saved) {
+        document.getElementById('last-updated').value = saved;
+    }
+
+    // Update view label
+    document.getElementById('view-label').textContent = 'Current View';
+
+    // Update active states
+    loadSnapshots();
+}
+
+// Delete a snapshot
+function deleteSnapshot(event, snapshotId) {
+    event.stopPropagation();
+
+    if (!confirm('Delete this snapshot?')) {
+        return;
+    }
+
+    let snapshots = getSnapshots();
+    snapshots = snapshots.filter(s => s.id !== snapshotId);
+    localStorage.setItem('goalSnapshots', JSON.stringify(snapshots));
+
+    // If we're viewing the deleted snapshot, go back to current view
+    if (currentSnapshotId === snapshotId) {
+        loadCurrentView();
+    } else {
+        loadSnapshots();
+    }
+
+    showNotification('Snapshot deleted');
+}
+
+// Get current principles data
+function getPrinciplesData() {
+    const principles = [];
+    const items = document.querySelectorAll('.principle-item');
+
+    items.forEach(item => {
+        const title = item.querySelector('.principle-title').value;
+        const description = item.querySelector('.principle-desc').value;
+        principles.push({ title, description });
+    });
+
+    return principles;
+}
+
+// Get current goals data for a timeline
+function getGoalsData(timeline) {
+    const goals = [];
     const container = document.getElementById(`${timeline}-container`);
-    const goalBoxes = container.querySelectorAll('.goal-box');
+    const rows = container.querySelectorAll('.goal-row');
 
-    const goals = Array.from(goalBoxes).map(box => ({
-        text: box.value,
-        archived: new Date().toLocaleDateString()
-    }));
+    rows.forEach(row => {
+        const text = row.querySelector('.goal-box').value;
+        const date = row.querySelector('.date-field').value;
+        const notes = row.querySelector('.notes-box').value;
+        goals.push({ text, date, notes });
+    });
 
-    // Load existing history
-    const historyKey = `history-${timeline}`;
-    const history = JSON.parse(localStorage.getItem(historyKey) || '[]');
-
-    // Add current goals to history
-    history.unshift(...goals);
-
-    // Save to localStorage
-    localStorage.setItem(historyKey, JSON.stringify(history));
-
-    // Re-render history panel
-    renderHistoryPanel(timeline, history);
+    return goals;
 }
 
-// Make archive function available globally for manual archiving
-window.archiveCurrentGoals = archiveCurrentGoals;
+// Load principles from data
+function loadPrinciplesFromData(principlesData) {
+    const container = document.getElementById('principles-container');
+    container.innerHTML = '';
+
+    principlesData.forEach(principle => {
+        const item = document.createElement('div');
+        item.className = 'principle-item';
+        item.innerHTML = `
+            <input type="text" class="principle-title" value="${principle.title}" placeholder="principle name">
+            <textarea class="principle-desc" placeholder="description">${principle.description}</textarea>
+        `;
+        container.appendChild(item);
+    });
+}
+
+// Load goals from data
+function loadGoalsFromData(timeline, goalsData) {
+    const container = document.getElementById(`${timeline}-container`);
+    container.innerHTML = '';
+
+    goalsData.forEach(goal => {
+        const row = createGoalRow(goal.text, goal.date, goal.notes);
+        container.appendChild(row);
+    });
+}
+
+// Show a notification message
+function showNotification(message) {
+    const notification = document.createElement('div');
+    notification.style.cssText = `
+        position: fixed;
+        top: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: var(--blue-accent);
+        color: white;
+        padding: 12px 24px;
+        border-radius: 8px;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+        z-index: 10000;
+        font-size: 14px;
+        font-weight: 500;
+        animation: slideDown 0.3s ease;
+    `;
+    notification.textContent = message;
+
+    document.body.appendChild(notification);
+
+    setTimeout(() => {
+        notification.style.animation = 'slideUp 0.3s ease';
+        setTimeout(() => notification.remove(), 300);
+    }, 2000);
+}
+
+// Add CSS animations for notifications
+const style = document.createElement('style');
+style.textContent = `
+    @keyframes slideDown {
+        from {
+            opacity: 0;
+            transform: translateX(-50%) translateY(-20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+    }
+
+    @keyframes slideUp {
+        from {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+        to {
+            opacity: 0;
+            transform: translateX(-50%) translateY(-20px);
+        }
+    }
+`;
+document.head.appendChild(style);
