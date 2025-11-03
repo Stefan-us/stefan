@@ -94,6 +94,8 @@ body {
     padding: 4px 0;
     pointer-events: none;
     user-select: none;
+    width: 250px;
+    min-width: 250px;
 }
 
 /* Principles Section */
@@ -399,7 +401,7 @@ body {
     bottom: 0;
     left: 0;
     right: 0;
-    background: #e8e8e8;
+    background: var(--pure-white);
     border-top: 2px solid var(--border-light);
     box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.08);
     z-index: 1000;
@@ -417,13 +419,13 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: #e8e8e8;
+    background: var(--pure-white);
     border-bottom: 1px solid var(--border-light);
     transition: all 0.3s ease;
 }
 
 .history-toggle:hover {
-    background: #d8d8d8;
+    background: var(--soft-white);
     transform: translateY(-2px);
 }
 
@@ -446,7 +448,7 @@ body {
 .history-tabs {
     display: flex;
     gap: 8px;
-    background: #d8d8d8;
+    background: var(--soft-white);
     padding: 12px 40px;
     border-bottom: 1px solid var(--border-light);
 }

@@ -247,18 +247,32 @@ function toggleHistorySidebar() {
 }
 
 function switchHistoryTab(tabName) {
+    console.log('Switching to tab:', tabName); // Debug log
+
     // Update tab buttons
     document.querySelectorAll('.history-tab').forEach(tab => {
         tab.classList.remove('active');
     });
-    document.querySelector(`[data-tab="${tabName}"]`).classList.add('active');
+    const activeTab = document.querySelector(`[data-tab="${tabName}"]`);
+    if (activeTab) {
+        activeTab.classList.add('active');
+    }
 
     // Update panels
     document.querySelectorAll('.history-panel').forEach(panel => {
         panel.classList.remove('active');
+        panel.style.display = 'none';
     });
-    document.getElementById(`history-${tabName}`).classList.add('active');
+    const activePanel = document.getElementById(`history-${tabName}`);
+    if (activePanel) {
+        activePanel.classList.add('active');
+        activePanel.style.display = 'block';
+    }
 }
+
+// Make functions globally accessible
+window.toggleHistorySidebar = toggleHistorySidebar;
+window.switchHistoryTab = switchHistoryTab;
 
 function loadHistoricalLogs() {
     // Load from localStorage
