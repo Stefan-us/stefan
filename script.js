@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setupDragSelection();
     setupChelseaEasterEgg();
     setupMariaEasterEgg();
+    showView('home');
 });
 
 // Load principles from config
@@ -236,39 +237,87 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// ========== TIMELINE NAVIGATION FUNCTIONALITY ==========
+// ========== VIEW SWITCHING FUNCTIONALITY ==========
 
-// View a specific timeline's historical data
-function viewTimeline(timeline) {
-    // Get historical data from localStorage
-    const historicalData = getHistoricalData(timeline);
+let currentView = 'home';
 
-    // If no historical data exists, show empty state
-    if (!historicalData || historicalData.length === 0) {
-        showEmptyState(timeline);
-        return;
-    }
-
-    // Load the historical data
-    const container = document.getElementById(`${timeline}-container`);
-    container.innerHTML = '';
-
-    historicalData.forEach(goal => {
-        const row = createGoalRow(goal.text, goal.date, goal.notes);
-        container.appendChild(row);
+// Show a specific view
+function showView(viewName) {
+    // Hide all views
+    document.querySelectorAll('.view-container').forEach(view => {
+        view.style.display = 'none';
     });
 
-    // Scroll to that section
-    const section = document.querySelector(`[data-timeline="${timeline}"]`);
-    if (section) {
-        section.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start'
-        });
+    // Remove active state from all buttons
+    document.querySelectorAll('.nav-btn').forEach(btn => {
+        btn.classList.remove('active');
+    });
+
+    // Show the selected view
+    let viewId = '';
+    let buttonId = '';
+
+    if (viewName === 'home') {
+        viewId = 'home-view';
+        buttonId = 'home-btn';
+    } else if (viewName === 'four-weeks') {
+        viewId = 'four-weeks-view';
+        buttonId = 'weeks-btn';
+        loadHistoricalData('four-weeks');
+    } else if (viewName === 'four-months') {
+        viewId = 'four-months-view';
+        buttonId = 'months-btn';
+        loadHistoricalData('four-months');
+    } else if (viewName === 'four-years') {
+        viewId = 'four-years-view';
+        buttonId = 'years-btn';
+        loadHistoricalData('four-years');
     }
 
-    // Update active button state
-    updateActiveButton(timeline);
+    // Show the view
+    const viewElement = document.getElementById(viewId);
+    if (viewElement) {
+        viewElement.style.display = 'block';
+        window.scrollTo(0, 0);
+    }
+
+    // Activate the button
+    const buttonElement = document.getElementById(buttonId);
+    if (buttonElement) {
+        buttonElement.classList.add('active');
+    }
+
+    currentView = viewName;
+}
+
+// Load historical data for a timeline
+function loadHistoricalData(timeline) {
+    const historicalData = getHistoricalData(timeline);
+    const container = document.getElementById(`${timeline}-historical`);
+
+    if (!container) return;
+
+    container.innerHTML = '';
+
+    if (!historicalData || historicalData.length === 0) {
+        // Show empty state
+        container.innerHTML = `
+            <div style="padding: 60px 40px; text-align: center;">
+                <p style="color: var(--text-tertiary); font-size: 15px; margin-bottom: 12px;">
+                    No historical data yet.
+                </p>
+                <p style="color: var(--text-tertiary); font-size: 13px;">
+                    Archive your current ${timeline.replace('-', ' ')} goals to view them here.
+                </p>
+            </div>
+        `;
+    } else {
+        // Load historical goals
+        historicalData.forEach(goal => {
+            const row = createGoalRow(goal.text, goal.date, goal.notes);
+            container.appendChild(row);
+        });
+    }
 }
 
 // Get historical data for a timeline from localStorage
@@ -276,46 +325,4 @@ function getHistoricalData(timeline) {
     const key = `historical_${timeline}`;
     const stored = localStorage.getItem(key);
     return stored ? JSON.parse(stored) : null;
-}
-
-// Show empty state message when no historical data exists
-function showEmptyState(timeline) {
-    const container = document.getElementById(`${timeline}-container`);
-    container.innerHTML = '<div style="padding: 40px; text-align: center; color: var(--text-tertiary); font-size: 14px;">No historical data yet. Update this timeline on the main page, then archive it to view here.</div>';
-
-    // Scroll to that section
-    const section = document.querySelector(`[data-timeline="${timeline}"]`);
-    if (section) {
-        section.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start'
-        });
-    }
-
-    // Update active button state
-    updateActiveButton(timeline);
-}
-
-// Update active button state
-function updateActiveButton(timeline) {
-    const buttons = document.querySelectorAll('.timeline-nav-btn');
-    buttons.forEach(btn => {
-        btn.classList.remove('active');
-    });
-
-    // Find and activate the clicked button
-    const timelineMap = {
-        'four-weeks': 0,
-        'four-months': 1,
-        'four-years': 2
-    };
-
-    if (timelineMap[timeline] !== undefined) {
-        buttons[timelineMap[timeline]].classList.add('active');
-    }
-
-    // Remove active state after 2 seconds
-    setTimeout(() => {
-        buttons.forEach(btn => btn.classList.remove('active'));
-    }, 2000);
 }

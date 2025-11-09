@@ -403,8 +403,8 @@ body {
     color: var(--text-primary);
 }
 
-/* Bottom bar for timeline navigation */
-.bottom-bar {
+/* Bottom Navigation Bar */
+.bottom-nav {
     position: fixed;
     bottom: 0;
     left: 0;
@@ -413,57 +413,89 @@ body {
     border-top: 2px solid var(--border-light);
     box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.08);
     z-index: 9000;
-    padding: 16px 20px;
+    padding: 12px 20px;
 }
 
-.bottom-bar-content {
+.bottom-nav-content {
     max-width: 900px;
     margin: 0 auto;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 16px;
+    gap: 12px;
 }
 
-.timeline-nav-btn {
+.nav-btn {
     background: var(--soft-white);
     color: var(--text-primary);
     border: 1px solid var(--border-light);
-    padding: 10px 24px;
-    font-size: 14px;
+    padding: 10px 20px;
+    font-size: 13px;
     font-family: inherit;
     font-weight: 500;
     border-radius: 6px;
     cursor: pointer;
     transition: all 0.2s ease;
     white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex: 1;
+    justify-content: center;
 }
 
-.timeline-nav-btn:hover {
+.nav-btn:hover {
     background: var(--blue-light);
     border-color: var(--blue-accent);
     color: var(--blue-accent);
 }
 
-.timeline-nav-btn.active {
+.nav-btn.active {
     background: var(--blue-accent);
     color: white;
     border-color: var(--blue-accent);
 }
 
-/* Adjust body padding for bottom bar */
-body {
+.nav-icon {
+    font-size: 16px;
+    line-height: 1;
+}
+
+.nav-label {
+    font-size: 13px;
+}
+
+.view-subtitle {
+    font-size: 14px;
+    color: var(--text-secondary);
+}
+
+/* View containers */
+.view-container {
+    min-height: 100vh;
     padding-bottom: 80px;
 }
 
+/* Adjust body padding for bottom nav */
+body {
+    padding-bottom: 0;
+}
+
 @media (max-width: 768px) {
-    .bottom-bar-content {
-        flex-wrap: wrap;
-        gap: 12px;
+    .bottom-nav-content {
+        gap: 8px;
     }
 
-    .timeline-nav-btn {
-        flex: 1;
-        min-width: 120px;
+    .nav-btn {
+        padding: 8px 12px;
+        font-size: 12px;
+    }
+
+    .nav-label {
+        font-size: 11px;
+    }
+
+    .nav-icon {
+        font-size: 14px;
     }
 }
