@@ -136,25 +136,18 @@
     <div class="selection-box" id="selection-box"></div>
     <div class="maria-secret" id="maria-secret">maria</div>
 
-    <!-- Bottom bar for historical views -->
+    <!-- Bottom bar for timeline navigation -->
     <div class="bottom-bar" id="bottom-bar">
         <div class="bottom-bar-content">
-            <div class="view-info">
-                <span class="view-label" id="view-label">Current View</span>
-            </div>
-            <div class="bottom-bar-actions">
-                <button class="bottom-btn save-snapshot-btn" id="save-snapshot-btn" onclick="saveSnapshot()">
-                    <span class="btn-icon">💾</span>
-                    <span class="btn-text">Save Snapshot</span>
-                </button>
-                <div class="snapshot-list" id="snapshot-list">
-                    <!-- Snapshots will be populated here -->
-                </div>
-                <button class="bottom-btn current-view-btn" id="current-view-btn" onclick="loadCurrentView()">
-                    <span class="btn-icon">🔄</span>
-                    <span class="btn-text">Current View</span>
-                </button>
-            </div>
+            <button class="timeline-nav-btn" onclick="viewTimeline('four-weeks')">
+                <span class="btn-text">four weeks.</span>
+            </button>
+            <button class="timeline-nav-btn" onclick="viewTimeline('four-months')">
+                <span class="btn-text">four months.</span>
+            </button>
+            <button class="timeline-nav-btn" onclick="viewTimeline('four-years')">
+                <span class="btn-text">four years.</span>
+            </button>
         </div>
     </div>
 

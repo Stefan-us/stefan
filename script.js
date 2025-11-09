@@ -237,260 +237,86 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// ========== HISTORICAL SNAPSHOTS FUNCTIONALITY ==========
+// ========== TIMELINE NAVIGATION FUNCTIONALITY ==========
 
-let currentSnapshotId = null;
+// View a specific timeline's historical data
+function viewTimeline(timeline) {
+    // Get historical data from localStorage
+    const historicalData = getHistoricalData(timeline);
 
-// Save current state as a snapshot
-function saveSnapshot() {
-    const snapshot = {
-        id: Date.now(),
-        timestamp: new Date().toISOString(),
-        date: new Date().toLocaleString(),
-        data: {
-            principles: getPrinciplesData(),
-            fourWeeks: getGoalsData('four-weeks'),
-            fourMonths: getGoalsData('four-months'),
-            fourYears: getGoalsData('four-years'),
-            lastUpdated: document.getElementById('last-updated').value
-        }
-    };
-
-    // Get existing snapshots
-    const snapshots = getSnapshots();
-    snapshots.push(snapshot);
-
-    // Save to localStorage
-    localStorage.setItem('goalSnapshots', JSON.stringify(snapshots));
-
-    // Refresh the snapshot list
-    loadSnapshots();
-
-    // Show confirmation
-    showNotification('Snapshot saved successfully!');
-}
-
-// Get all snapshots from localStorage
-function getSnapshots() {
-    const stored = localStorage.getItem('goalSnapshots');
-    return stored ? JSON.parse(stored) : [];
-}
-
-// Load and display all snapshots
-function loadSnapshots() {
-    const snapshots = getSnapshots();
-    const snapshotList = document.getElementById('snapshot-list');
-
-    snapshotList.innerHTML = '';
-
-    snapshots.forEach((snapshot, index) => {
-        const btn = document.createElement('button');
-        btn.className = 'snapshot-btn';
-        if (currentSnapshotId === snapshot.id) {
-            btn.classList.add('active');
-        }
-
-        const dateStr = new Date(snapshot.timestamp).toLocaleDateString();
-        const timeStr = new Date(snapshot.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-
-        btn.innerHTML = `
-            <span>${dateStr} ${timeStr}</span>
-            <span class="snapshot-delete" onclick="deleteSnapshot(event, ${snapshot.id})">×</span>
-        `;
-
-        btn.onclick = (e) => {
-            if (!e.target.classList.contains('snapshot-delete')) {
-                loadSnapshot(snapshot.id);
-            }
-        };
-
-        snapshotList.appendChild(btn);
-    });
-}
-
-// Load a specific snapshot
-function loadSnapshot(snapshotId) {
-    const snapshots = getSnapshots();
-    const snapshot = snapshots.find(s => s.id === snapshotId);
-
-    if (!snapshot) {
-        console.error('Snapshot not found');
+    // If no historical data exists, show empty state
+    if (!historicalData || historicalData.length === 0) {
+        showEmptyState(timeline);
         return;
     }
 
-    currentSnapshotId = snapshotId;
-
-    // Load the snapshot data
-    loadPrinciplesFromData(snapshot.data.principles);
-    loadGoalsFromData('four-weeks', snapshot.data.fourWeeks);
-    loadGoalsFromData('four-months', snapshot.data.fourMonths);
-    loadGoalsFromData('four-years', snapshot.data.fourYears);
-
-    if (snapshot.data.lastUpdated) {
-        document.getElementById('last-updated').value = snapshot.data.lastUpdated;
-    }
-
-    // Update view label
-    const dateStr = new Date(snapshot.timestamp).toLocaleString();
-    document.getElementById('view-label').textContent = `Viewing: ${dateStr}`;
-
-    // Update active states
-    loadSnapshots();
-}
-
-// Load current/live view
-function loadCurrentView() {
-    currentSnapshotId = null;
-
-    // Reload from config
-    loadPrinciplesFromData(GOALS_CONFIG.principles);
-    loadGoalsFromData('four-weeks', GOALS_CONFIG.fourWeeks);
-    loadGoalsFromData('four-months', GOALS_CONFIG.fourMonths);
-    loadGoalsFromData('four-years', GOALS_CONFIG.fourYears);
-
-    // Restore last updated from localStorage
-    const saved = localStorage.getItem('lastUpdated');
-    if (saved) {
-        document.getElementById('last-updated').value = saved;
-    }
-
-    // Update view label
-    document.getElementById('view-label').textContent = 'Current View';
-
-    // Update active states
-    loadSnapshots();
-}
-
-// Delete a snapshot
-function deleteSnapshot(event, snapshotId) {
-    event.stopPropagation();
-
-    if (!confirm('Delete this snapshot?')) {
-        return;
-    }
-
-    let snapshots = getSnapshots();
-    snapshots = snapshots.filter(s => s.id !== snapshotId);
-    localStorage.setItem('goalSnapshots', JSON.stringify(snapshots));
-
-    // If we're viewing the deleted snapshot, go back to current view
-    if (currentSnapshotId === snapshotId) {
-        loadCurrentView();
-    } else {
-        loadSnapshots();
-    }
-
-    showNotification('Snapshot deleted');
-}
-
-// Get current principles data
-function getPrinciplesData() {
-    const principles = [];
-    const items = document.querySelectorAll('.principle-item');
-
-    items.forEach(item => {
-        const title = item.querySelector('.principle-title').value;
-        const description = item.querySelector('.principle-desc').value;
-        principles.push({ title, description });
-    });
-
-    return principles;
-}
-
-// Get current goals data for a timeline
-function getGoalsData(timeline) {
-    const goals = [];
-    const container = document.getElementById(`${timeline}-container`);
-    const rows = container.querySelectorAll('.goal-row');
-
-    rows.forEach(row => {
-        const text = row.querySelector('.goal-box').value;
-        const date = row.querySelector('.date-field').value;
-        const notes = row.querySelector('.notes-box').value;
-        goals.push({ text, date, notes });
-    });
-
-    return goals;
-}
-
-// Load principles from data
-function loadPrinciplesFromData(principlesData) {
-    const container = document.getElementById('principles-container');
-    container.innerHTML = '';
-
-    principlesData.forEach(principle => {
-        const item = document.createElement('div');
-        item.className = 'principle-item';
-        item.innerHTML = `
-            <input type="text" class="principle-title" value="${principle.title}" placeholder="principle name">
-            <textarea class="principle-desc" placeholder="description">${principle.description}</textarea>
-        `;
-        container.appendChild(item);
-    });
-}
-
-// Load goals from data
-function loadGoalsFromData(timeline, goalsData) {
+    // Load the historical data
     const container = document.getElementById(`${timeline}-container`);
     container.innerHTML = '';
 
-    goalsData.forEach(goal => {
+    historicalData.forEach(goal => {
         const row = createGoalRow(goal.text, goal.date, goal.notes);
         container.appendChild(row);
     });
+
+    // Scroll to that section
+    const section = document.querySelector(`[data-timeline="${timeline}"]`);
+    if (section) {
+        section.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+        });
+    }
+
+    // Update active button state
+    updateActiveButton(timeline);
 }
 
-// Show a notification message
-function showNotification(message) {
-    const notification = document.createElement('div');
-    notification.style.cssText = `
-        position: fixed;
-        top: 20px;
-        left: 50%;
-        transform: translateX(-50%);
-        background: var(--blue-accent);
-        color: white;
-        padding: 12px 24px;
-        border-radius: 8px;
-        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
-        z-index: 10000;
-        font-size: 14px;
-        font-weight: 500;
-        animation: slideDown 0.3s ease;
-    `;
-    notification.textContent = message;
+// Get historical data for a timeline from localStorage
+function getHistoricalData(timeline) {
+    const key = `historical_${timeline}`;
+    const stored = localStorage.getItem(key);
+    return stored ? JSON.parse(stored) : null;
+}
 
-    document.body.appendChild(notification);
+// Show empty state message when no historical data exists
+function showEmptyState(timeline) {
+    const container = document.getElementById(`${timeline}-container`);
+    container.innerHTML = '<div style="padding: 40px; text-align: center; color: var(--text-tertiary); font-size: 14px;">No historical data yet. Update this timeline on the main page, then archive it to view here.</div>';
 
+    // Scroll to that section
+    const section = document.querySelector(`[data-timeline="${timeline}"]`);
+    if (section) {
+        section.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+        });
+    }
+
+    // Update active button state
+    updateActiveButton(timeline);
+}
+
+// Update active button state
+function updateActiveButton(timeline) {
+    const buttons = document.querySelectorAll('.timeline-nav-btn');
+    buttons.forEach(btn => {
+        btn.classList.remove('active');
+    });
+
+    // Find and activate the clicked button
+    const timelineMap = {
+        'four-weeks': 0,
+        'four-months': 1,
+        'four-years': 2
+    };
+
+    if (timelineMap[timeline] !== undefined) {
+        buttons[timelineMap[timeline]].classList.add('active');
+    }
+
+    // Remove active state after 2 seconds
     setTimeout(() => {
-        notification.style.animation = 'slideUp 0.3s ease';
-        setTimeout(() => notification.remove(), 300);
+        buttons.forEach(btn => btn.classList.remove('active'));
     }, 2000);
 }
-
-// Add CSS animations for notifications
-const style = document.createElement('style');
-style.textContent = `
-    @keyframes slideDown {
-        from {
-            opacity: 0;
-            transform: translateX(-50%) translateY(-20px);
-        }
-        to {
-            opacity: 1;
-            transform: translateX(-50%) translateY(0);
-        }
-    }
-
-    @keyframes slideUp {
-        from {
-            opacity: 1;
-            transform: translateX(-50%) translateY(0);
-        }
-        to {
-            opacity: 0;
-            transform: translateX(-50%) translateY(-20px);
-        }
-    }
-`;
-document.head.appendChild(style);
