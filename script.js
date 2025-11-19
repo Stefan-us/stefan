@@ -72,9 +72,9 @@ function loadLastUpdated() {
     if (saved) {
         dateInput.value = saved;
     } else {
-        // Set default date
-        dateInput.value = '11 / 20 / 2025';
-        localStorage.setItem('lastUpdated', '11 / 20 / 2025');
+        // Set default date (UK format: DD/MM/YYYY)
+        dateInput.value = '20 / 11 / 2025';
+        localStorage.setItem('lastUpdated', '20 / 11 / 2025');
     }
 
     dateInput.addEventListener('change', () => {
@@ -276,6 +276,11 @@ function showView(viewName) {
         viewId = 'four-years-view';
         buttonId = 'years-btn';
         loadHistoricalData('four-years');
+    } else if (viewName === 'style') {
+        viewId = 'style-view';
+        buttonId = 'style-btn';
+        loadWardrobeData();
+        loadColorPalette();
     }
 
     // Show the view
@@ -329,4 +334,54 @@ function getHistoricalData(timeline) {
     const key = `historical_${timeline}`;
     const stored = localStorage.getItem(key);
     return stored ? JSON.parse(stored) : null;
+}
+
+// Load wardrobe data
+function loadWardrobeData() {
+    if (!GOALS_CONFIG.wardrobe) return;
+
+    const categories = ['jackets', 'jumpers', 'trousers', 'shoes', 'accessories'];
+
+    categories.forEach(category => {
+        const container = document.getElementById(`${category}-items`);
+        if (!container) return;
+
+        container.innerHTML = '';
+
+        const items = GOALS_CONFIG.wardrobe[category];
+        if (!items || items.length === 0) {
+            container.innerHTML = '<div style="padding: 20px; text-align: center; color: var(--text-tertiary); font-size: 14px;">No items yet</div>';
+            return;
+        }
+
+        items.forEach(item => {
+            const itemEl = document.createElement('div');
+            itemEl.className = 'wardrobe-item';
+            itemEl.innerHTML = `
+                <span class="item-name">${item.item}</span>
+                <span class="item-notes">${item.notes}</span>
+            `;
+            container.appendChild(itemEl);
+        });
+    });
+}
+
+// Load color palette
+function loadColorPalette() {
+    if (!GOALS_CONFIG.powerColors) return;
+
+    const container = document.getElementById('color-palette');
+    if (!container) return;
+
+    container.innerHTML = '';
+
+    GOALS_CONFIG.powerColors.forEach(color => {
+        const colorEl = document.createElement('div');
+        colorEl.className = 'color-item';
+        colorEl.innerHTML = `
+            <div class="color-circle" style="background-color: ${color.hex};"></div>
+            <span class="color-name">${color.name}</span>
+        `;
+        container.appendChild(colorEl);
+    });
 }

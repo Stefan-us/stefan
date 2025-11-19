@@ -220,6 +220,34 @@ const GOALS_CONFIG = {
             date: "2030",
             notes: "confident, influential, genuine - not cringy or rude"
         }
+    ],
+
+    // Style & Icing - Wardrobe Goals
+    wardrobe: {
+        jackets: [
+            { item: "navy blazer", notes: "versatile, formal" }
+        ],
+        jumpers: [
+            { item: "shetland jumper", notes: "classic, quality knit" }
+        ],
+        trousers: [
+            { item: "dark grey chinos", notes: "smart casual" }
+        ],
+        shoes: [
+            { item: "brown leather brogues", notes: "timeless style" }
+        ],
+        accessories: [
+            { item: "leather watch", notes: "subtle elegance" }
+        ]
+    },
+
+    // Power Colors Palette
+    powerColors: [
+        { name: "navy blue", hex: "#034694" },
+        { name: "charcoal grey", hex: "#36454F" },
+        { name: "forest green", hex: "#228B22" },
+        { name: "burgundy", hex: "#800020" },
+        { name: "cream white", hex: "#F5F5DC" }
     ]
 };
 

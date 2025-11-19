@@ -455,7 +455,7 @@ body {
 }
 
 .nav-btn.active {
-    background: linear-gradient(135deg, var(--blue-accent) 0%, #3a7bc8 100%);
+    background: var(--blue-accent);
     color: white;
     border-color: var(--blue-accent);
     box-shadow: 0 4px 16px rgba(3, 70, 148, 0.3);
@@ -482,6 +482,91 @@ body {
 .view-subtitle {
     font-size: 14px;
     color: var(--text-secondary);
+}
+
+/* Wardrobe Section */
+.wardrobe-section {
+    margin-bottom: 60px;
+}
+
+.wardrobe-category {
+    margin-bottom: 40px;
+}
+
+.category-title {
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--text-primary);
+    margin-bottom: 16px;
+    letter-spacing: -0.3px;
+}
+
+.wardrobe-items {
+    display: grid;
+    gap: 12px;
+}
+
+.wardrobe-item {
+    background: var(--pure-white);
+    padding: 16px 20px;
+    border: 1px solid var(--border-light);
+    border-left: 3px solid var(--blue-accent);
+    border-radius: 6px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.2s ease;
+}
+
+.wardrobe-item:hover {
+    border-left-color: var(--blue-accent);
+    box-shadow: var(--shadow-sm);
+}
+
+.item-name {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+.item-notes {
+    font-size: 13px;
+    color: var(--text-tertiary);
+}
+
+/* Color Palette Section */
+.color-palette-section {
+    margin-bottom: 60px;
+}
+
+.color-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 24px;
+    margin-top: 24px;
+}
+
+.color-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+
+.color-circle {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    border: 3px solid var(--pure-white);
+    outline: 1px solid var(--border-light);
+}
+
+.color-name {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    text-align: center;
 }
 
 /* View containers */
