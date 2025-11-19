@@ -84,9 +84,39 @@ const GOALS_CONFIG = {
     // Four Year Goals (Update every 4 years)
     fourYears: [
         {
-            text: "• learn greek conversationally - read and speak at a strong level.\n• be the best version of yourself.\n• start a business that makes as much as your salary - expand, try new things, take risks.\n• build your dream body - be in the best shape ever.\n• have a defined style - the way you look, treat yourself, your character.\n• strengthen the relationships you have - value those around you.\n• create new relationships with people that really matter.",
+            text: "learn greek conversationally - read and speak at a strong level.",
             date: "2030",
-            notes: "four year vision"
+            notes: "language goal"
+        },
+        {
+            text: "be the best version of yourself.",
+            date: "2030",
+            notes: "personal growth"
+        },
+        {
+            text: "start a business that makes as much as your salary - expand, try new things, take risks.",
+            date: "2030",
+            notes: "entrepreneurship"
+        },
+        {
+            text: "build your dream body - be in the best shape ever.",
+            date: "2030",
+            notes: "fitness goal"
+        },
+        {
+            text: "have a defined style - the way you look, treat yourself, your character.",
+            date: "2030",
+            notes: "personal brand"
+        },
+        {
+            text: "strengthen the relationships you have - value those around you.",
+            date: "2030",
+            notes: "existing bonds"
+        },
+        {
+            text: "create new relationships with people that really matter.",
+            date: "2030",
+            notes: "new connections"
         }
     ]
 };
