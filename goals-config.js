@@ -35,30 +35,69 @@ const GOALS_CONFIG = {
         {
             title: "be the best version of yourself.",
             description: "always strive to be your best self. not the best of everyone, but your personal best. stay rooted while you grow."
+        },
+        {
+            title: "don't lose your cool.",
+            description: "stay calm and collected in every situation. never let anger or frustration control you. composure is strength."
         }
     ],
 
     // Four Week Goals (Update every 4 weeks)
     fourWeeks: [
         {
-            text: "complete weekly tasks and deliverables",
-            date: "week 1",
-            notes: "stay organized"
+            text: "start maximizing potential at the gym",
+            date: "dec 1 - dec 31",
+            notes: "hit PRs, return to peak form"
         },
         {
-            text: "make progress on current projects",
-            date: "week 2",
-            notes: "track milestones"
+            text: "consolidate relationships with people who care",
+            date: "dec 1 - dec 31",
+            notes: "meet up, bond, make effort"
         },
         {
-            text: "practice new skills daily",
-            date: "week 3",
-            notes: "30 min/day"
+            text: "start business groundwork - research and plan",
+            date: "dec 1 - dec 31",
+            notes: "read, get ideas, direction"
         },
         {
             text: "review and reflect on progress",
-            date: "week 4",
-            notes: "end of month"
+            date: "dec 1 - dec 31",
+            notes: "assess where you are"
+        },
+        {
+            text: "prepare for christmas",
+            date: "dec 1 - dec 31",
+            notes: "buy presents for everyone"
+        },
+        {
+            text: "complete everything on to-do list",
+            date: "dec 1 - dec 31",
+            notes: "personal task tracking"
+        },
+        {
+            text: "create clothing and wardrobe plan",
+            date: "dec 1 - dec 31",
+            notes: "colors, style, build list"
+        },
+        {
+            text: "find suitable hairstyle",
+            date: "dec 1 - dec 31",
+            notes: "experiment, find what fits"
+        },
+        {
+            text: "work towards goals and principles",
+            date: "dec 1 - dec 31",
+            notes: "consistent daily effort"
+        },
+        {
+            text: "focus on nutrition - eat more, cut junk",
+            date: "dec 1 - dec 31",
+            notes: "healthy eating habits"
+        },
+        {
+            text: "sort out budget and finances",
+            date: "dec 1 - dec 31",
+            notes: "payslips, in/out system"
         }
     ],
 

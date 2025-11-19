@@ -71,6 +71,10 @@ function loadLastUpdated() {
     const saved = localStorage.getItem('lastUpdated');
     if (saved) {
         dateInput.value = saved;
+    } else {
+        // Set default date
+        dateInput.value = '11 / 20 / 2025';
+        localStorage.setItem('lastUpdated', '11 / 20 / 2025');
     }
 
     dateInput.addEventListener('change', () => {
