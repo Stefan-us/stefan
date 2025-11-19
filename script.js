@@ -358,8 +358,10 @@ function loadWardrobeData() {
             const itemEl = document.createElement('div');
             itemEl.className = 'wardrobe-item';
             itemEl.innerHTML = `
-                <span class="item-name">${item.item}</span>
-                <span class="item-notes">${item.notes}</span>
+                <div>
+                    <div class="item-name">${item.item}</div>
+                    ${item.description ? `<div class="item-description">${item.description}</div>` : ''}
+                </div>
             `;
             container.appendChild(itemEl);
         });
@@ -368,20 +370,53 @@ function loadWardrobeData() {
 
 // Load color palette
 function loadColorPalette() {
-    if (!GOALS_CONFIG.powerColors) return;
+    // Load excellent colors
+    if (GOALS_CONFIG.colorsExcellent) {
+        const excellentCategories = ['neutrals', 'blues', 'greens', 'redsPinks', 'purples', 'earthTones', 'accents'];
 
-    const container = document.getElementById('color-palette');
-    if (!container) return;
+        excellentCategories.forEach(category => {
+            const container = document.getElementById(`colors-excellent-${category}`);
+            if (!container) return;
 
-    container.innerHTML = '';
+            container.innerHTML = '';
 
-    GOALS_CONFIG.powerColors.forEach(color => {
-        const colorEl = document.createElement('div');
-        colorEl.className = 'color-item';
-        colorEl.innerHTML = `
-            <div class="color-circle" style="background-color: ${color.hex};"></div>
-            <span class="color-name">${color.name}</span>
-        `;
-        container.appendChild(colorEl);
-    });
+            const colors = GOALS_CONFIG.colorsExcellent[category];
+            if (!colors || colors.length === 0) return;
+
+            colors.forEach(color => {
+                const colorEl = document.createElement('div');
+                colorEl.className = 'color-item';
+                colorEl.innerHTML = `
+                    <div class="color-circle excellent" style="background-color: ${color.hex};"></div>
+                    <span class="color-name">${color.name}</span>
+                `;
+                container.appendChild(colorEl);
+            });
+        });
+    }
+
+    // Load colors to avoid
+    if (GOALS_CONFIG.colorsAvoid) {
+        const avoidCategories = ['neutrals', 'blues', 'greens', 'redsPinks', 'purples', 'earthTones'];
+
+        avoidCategories.forEach(category => {
+            const container = document.getElementById(`colors-avoid-${category}`);
+            if (!container) return;
+
+            container.innerHTML = '';
+
+            const colors = GOALS_CONFIG.colorsAvoid[category];
+            if (!colors || colors.length === 0) return;
+
+            colors.forEach(color => {
+                const colorEl = document.createElement('div');
+                colorEl.className = 'color-item';
+                colorEl.innerHTML = `
+                    <div class="color-circle avoid" style="background-color: ${color.hex};"></div>
+                    <span class="color-name avoid-text">${color.name}</span>
+                `;
+                container.appendChild(colorEl);
+            });
+        });
+    }
 }
