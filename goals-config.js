@@ -39,6 +39,14 @@ const GOALS_CONFIG = {
         {
             title: "don't lose your cool.",
             description: "stay calm and collected in every situation. never let anger or frustration control you. composure is strength."
+        },
+        {
+            title: "things take time.",
+            description: "plan for the future, not instant results. set long-term goals and work towards them step-by-step. consistency over time brings success."
+        },
+        {
+            title: "never waste time.",
+            description: "use your free time productively. read, develop skills, build something. every moment is an opportunity to grow."
         }
     ],
 
@@ -98,25 +106,75 @@ const GOALS_CONFIG = {
             text: "sort out budget and finances",
             date: "dec 1 - dec 31",
             notes: "payslips, in/out system"
+        },
+        {
+            text: "start reading a book on self-confidence",
+            date: "dec 1 - dec 31",
+            notes: "build foundation for charisma"
         }
     ],
 
     // Four Month Goals (Update every 4 months)
     fourMonths: [
         {
-            text: "complete a major project or milestone",
-            date: "feb 2025",
-            notes: "define specifics"
+            text: "keep friendships and integrate with new people",
+            date: "dec 2025 - mar 2026",
+            notes: "merge existing and new circles"
         },
         {
-            text: "learn a new skill or technology",
-            date: "feb-may 2025",
-            notes: "online course"
+            text: "consistently gym - lose fat, gain muscle mass",
+            date: "dec 2025 - mar 2026",
+            notes: "strict diet, weight loss focus"
         },
         {
-            text: "build or strengthen key relationships",
-            date: "q1 2025",
-            notes: "network actively"
+            text: "generate first business income - earn first pound",
+            date: "dec 2025 - mar 2026",
+            notes: "groundwork set, make first sale"
+        },
+        {
+            text: "learn a new skill never done before",
+            date: "dec 2025 - mar 2026",
+            notes: "skiing, or something new"
+        },
+        {
+            text: "begin learning greek intensively",
+            date: "dec 2025 - mar 2026",
+            notes: "sentences, talking, reading, writing"
+        },
+        {
+            text: "work towards principles consistently",
+            date: "dec 2025 - mar 2026",
+            notes: "daily implementation"
+        },
+        {
+            text: "get rid of things I don't need, acquire value",
+            date: "dec 2025 - mar 2026",
+            notes: "sell, declutter, upgrade"
+        },
+        {
+            text: "solid foundation of training at work",
+            date: "dec 2025 - mar 2026",
+            notes: "courses, go above and beyond"
+        },
+        {
+            text: "understand what the future holds for me",
+            date: "dec 2025 - mar 2026",
+            notes: "career vision, planning"
+        },
+        {
+            text: "expand network at work - meet new people",
+            date: "dec 2025 - mar 2026",
+            notes: "events, outside my team"
+        },
+        {
+            text: "be confident, charming, influential",
+            date: "dec 2025 - mar 2026",
+            notes: "build lifestyle and communication"
+        },
+        {
+            text: "organize finances - clear, smart, structured",
+            date: "dec 2025 - mar 2026",
+            notes: "budgeting system in place"
         }
     ],
 
@@ -156,6 +214,11 @@ const GOALS_CONFIG = {
             text: "create new relationships with people that really matter.",
             date: "2030",
             notes: "new connections"
+        },
+        {
+            text: "be charming and a personality people love to be around.",
+            date: "2030",
+            notes: "confident, influential, genuine - not cringy or rude"
         }
     ]
 };
