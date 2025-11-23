@@ -216,9 +216,9 @@ const GOALS_CONFIG = {
             notes: "new connections"
         },
         {
-            text: "be charming and a personality people love to be around.",
+            text: "be a kinder person and someone people enjoy being around.",
             date: "2030",
-            notes: "confident, influential, genuine - not cringy or rude"
+            notes: "genuine kindness"
         }
     ],
 
@@ -241,98 +241,98 @@ const GOALS_CONFIG = {
         ]
     },
 
-    // Power Colors - Colors That Suit You
-    colorsExcellent: {
+    // Power Colours  Colours That Suit You
+    coloursExcellent: {
         neutrals: [
-            { name: "soft charcoal grey", hex: "#4A5568" },
-            { name: "slate blue-grey", hex: "#5F7A8B" },
-            { name: "cocoa brown (cool-toned)", hex: "#6B5B52" },
-            { name: "greige", hex: "#B8B5A8" },
-            { name: "soft navy", hex: "#4E5D6C" },
-            { name: "dusty taupe", hex: "#8B7F77" },
-            { name: "cool beige/stone", hex: "#C9C0B5" }
+            { name: "soft charcoal grey", hex: "#3E414A" },
+            { name: "slate blue grey", hex: "#6D8196" },
+            { name: "cocoa brown cool toned", hex: "#5D473A" },
+            { name: "greige", hex: "#B0A999" },
+            { name: "soft navy", hex: "#3D3D90" },
+            { name: "dusty taupe", hex: "#B4A19D" },
+            { name: "cool beige stone", hex: "#EDE8D0" }
         ],
         blues: [
-            { name: "dusty/powder blue", hex: "#A4C3D2" },
-            { name: "slate blue", hex: "#6A7B8C" },
-            { name: "soft periwinkle", hex: "#9FB4D3" },
-            { name: "greyish blue-green (teal)", hex: "#5B8A8C" },
-            { name: "dusty denim blue", hex: "#6B8FA3" },
-            { name: "soft navy with grey", hex: "#4E5D6C" }
+            { name: "dusty powder blue", hex: "#B0E0E6" },
+            { name: "slate blue", hex: "#6A5ACD" },
+            { name: "soft periwinkle", hex: "#CCCCFF" },
+            { name: "greyish blue green teal", hex: "#4C9085" },
+            { name: "dusty denim blue", hex: "#5A86AD" },
+            { name: "soft navy with grey", hex: "#3D3D90" }
         ],
         greens: [
-            { name: "sage green", hex: "#8A9A7B" },
-            { name: "eucalyptus/mint grey", hex: "#90B8A4" },
-            { name: "soft olive", hex: "#7C8577" },
-            { name: "dusty teal", hex: "#5B8A8C" },
-            { name: "soft pine green", hex: "#667C6A" },
-            { name: "greyish jade", hex: "#6B9689" }
+            { name: "sage green", hex: "#BBB791" },
+            { name: "eucalyptus mint grey", hex: "#5F8575" },
+            { name: "soft olive", hex: "#708238" },
+            { name: "dusty teal", hex: "#769393" },
+            { name: "soft pine green", hex: "#01796F" },
+            { name: "greyish jade", hex: "#418C8C" }
         ],
         redsPinks: [
-            { name: "dusty rose", hex: "#C4A4A7" },
-            { name: "mauve/soft mulberry", hex: "#A7879B" },
-            { name: "raspberry grey", hex: "#9B6B7E" },
-            { name: "soft watermelon pink", hex: "#D89BA3" },
-            { name: "cool burgundy", hex: "#7A4A5A" },
-            { name: "dusty coral", hex: "#D4949D" }
+            { name: "dusty rose", hex: "#DCA1A1" },
+            { name: "mauve soft mulberry", hex: "#C4AAAC" },
+            { name: "raspberry grey", hex: "#B48B9C" },
+            { name: "soft watermelon pink", hex: "#FC6C85" },
+            { name: "cool burgundy", hex: "#800020" },
+            { name: "dusty coral", hex: "#E2725B" }
         ],
         purples: [
-            { name: "soft lavender", hex: "#B4A7D6" },
-            { name: "dusty plum", hex: "#8B7B8B" },
-            { name: "mauve", hex: "#A58FAA" },
-            { name: "periwinkle purple", hex: "#9FB4D3" },
-            { name: "soft heather", hex: "#A89BAC" },
-            { name: "greyish lilac", hex: "#B8A8C4" }
+            { name: "soft lavender", hex: "#E6E6FA" },
+            { name: "dusty plum", hex: "#DDA0DD" },
+            { name: "mauve", hex: "#E0B0FF" },
+            { name: "periwinkle purple", hex: "#CCCCFF" },
+            { name: "soft heather", hex: "#B7C3D0" },
+            { name: "greyish lilac", hex: "#C8A2C8" }
         ],
         earthTones: [
-            { name: "cool taupe", hex: "#8B8378" },
-            { name: "soft mushroom", hex: "#A39689" },
-            { name: "dusty rose-brown", hex: "#9D8B84" },
-            { name: "cool cocoa", hex: "#7B6C65" },
-            { name: "soft pewter brown", hex: "#8A7F76" }
+            { name: "cool taupe", hex: "#8C7D75" },
+            { name: "soft mushroom", hex: "#B0A999" },
+            { name: "dusty rose brown", hex: "#B48E92" },
+            { name: "cool cocoa", hex: "#5D473A" },
+            { name: "soft pewter brown", hex: "#8C7D75" }
         ],
         accents: [
-            { name: "soft teal", hex: "#5B8A8C" },
-            { name: "dusty turquoise", hex: "#6B9FA3" },
-            { name: "soft seafoam", hex: "#7FA99C" },
-            { name: "muted coral-pink", hex: "#D4949D" },
-            { name: "soft burgundy", hex: "#7A4A5A" }
+            { name: "soft teal", hex: "#8DDCDC" },
+            { name: "dusty turquoise", hex: "#769393" },
+            { name: "soft seafoam", hex: "#9FE2BF" },
+            { name: "muted coral pink", hex: "#FFB5B4" },
+            { name: "soft burgundy", hex: "#800020" }
         ]
     },
 
-    // Colors to Avoid
-    colorsAvoid: {
+    // Colours to Avoid
+    coloursAvoid: {
         neutrals: [
             { name: "pure black", hex: "#000000" },
-            { name: "camel/warm tan", hex: "#C19A6B" },
+            { name: "camel warm tan", hex: "#C19A6B" },
             { name: "bright white", hex: "#FFFFFF" }
         ],
         blues: [
             { name: "bright royal blue", hex: "#4169E1" },
             { name: "warm turquoise", hex: "#40E0D0" },
-            { name: "electric/neon blue", hex: "#0080FF" }
+            { name: "electric neon blue", hex: "#7DF9FF" }
         ],
         greens: [
             { name: "bright lime green", hex: "#32CD32" },
             { name: "kelly green", hex: "#4CBB17" },
-            { name: "warm moss/khaki", hex: "#8B8149" }
+            { name: "warm moss khaki", hex: "#F0E68C" }
         ],
         redsPinks: [
             { name: "fire engine red", hex: "#CE2029" },
-            { name: "orange-red/tomato", hex: "#FF6347" },
-            { name: "hot pink/fuchsia", hex: "#FF00FF" },
-            { name: "warm coral/peach", hex: "#FFAA80" }
+            { name: "orange red tomato", hex: "#FF6347" },
+            { name: "hot pink fuchsia", hex: "#FF00FF" },
+            { name: "warm coral peach", hex: "#FFD3AC" }
         ],
         purples: [
-            { name: "bright violet", hex: "#8F00FF" },
+            { name: "bright violet", hex: "#9D0BFA" },
             { name: "deep eggplant", hex: "#614051" },
-            { name: "neon purple", hex: "#BC13FE" }
+            { name: "neon purple", hex: "#8A00C4" }
         ],
         earthTones: [
-            { name: "warm camel/tan", hex: "#C19A6B" },
-            { name: "orange-brown", hex: "#A0522D" },
-            { name: "golden beige", hex: "#E6C792" },
-            { name: "rust/terra cotta", hex: "#B7410E" },
+            { name: "warm camel tan", hex: "#C19A6B" },
+            { name: "orange brown", hex: "#B76E79" },
+            { name: "golden beige", hex: "#D8C39F" },
+            { name: "rust terra cotta", hex: "#E2725B" },
             { name: "warm khaki", hex: "#C3B091" }
         ]
     }

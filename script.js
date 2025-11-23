@@ -368,10 +368,10 @@ function loadWardrobeData() {
     });
 }
 
-// Load color palette
+// Load colour palette
 function loadColorPalette() {
-    // Load excellent colors
-    if (GOALS_CONFIG.colorsExcellent) {
+    // Load excellent colours
+    if (GOALS_CONFIG.coloursExcellent) {
         const excellentCategories = ['neutrals', 'blues', 'greens', 'redsPinks', 'purples', 'earthTones', 'accents'];
 
         excellentCategories.forEach(category => {
@@ -380,23 +380,23 @@ function loadColorPalette() {
 
             container.innerHTML = '';
 
-            const colors = GOALS_CONFIG.colorsExcellent[category];
-            if (!colors || colors.length === 0) return;
+            const colours = GOALS_CONFIG.coloursExcellent[category];
+            if (!colours || colours.length === 0) return;
 
-            colors.forEach(color => {
-                const colorEl = document.createElement('div');
-                colorEl.className = 'color-item';
-                colorEl.innerHTML = `
-                    <div class="color-circle excellent" style="background-color: ${color.hex};"></div>
-                    <span class="color-name">${color.name}</span>
+            colours.forEach(colour => {
+                const colourEl = document.createElement('div');
+                colourEl.className = 'color-item';
+                colourEl.innerHTML = `
+                    <div class="color-circle excellent" style="background-color: ${colour.hex};"></div>
+                    <span class="color-name">${colour.name}</span>
                 `;
-                container.appendChild(colorEl);
+                container.appendChild(colourEl);
             });
         });
     }
 
-    // Load colors to avoid
-    if (GOALS_CONFIG.colorsAvoid) {
+    // Load colours to avoid
+    if (GOALS_CONFIG.coloursAvoid) {
         const avoidCategories = ['neutrals', 'blues', 'greens', 'redsPinks', 'purples', 'earthTones'];
 
         avoidCategories.forEach(category => {
@@ -405,17 +405,17 @@ function loadColorPalette() {
 
             container.innerHTML = '';
 
-            const colors = GOALS_CONFIG.colorsAvoid[category];
-            if (!colors || colors.length === 0) return;
+            const colours = GOALS_CONFIG.coloursAvoid[category];
+            if (!colours || colours.length === 0) return;
 
-            colors.forEach(color => {
-                const colorEl = document.createElement('div');
-                colorEl.className = 'color-item';
-                colorEl.innerHTML = `
-                    <div class="color-circle avoid" style="background-color: ${color.hex};"></div>
-                    <span class="color-name avoid-text">${color.name}</span>
+            colours.forEach(colour => {
+                const colourEl = document.createElement('div');
+                colourEl.className = 'color-item';
+                colourEl.innerHTML = `
+                    <div class="color-circle avoid" style="background-color: ${colour.hex};"></div>
+                    <span class="color-name avoid-text">${colour.name}</span>
                 `;
-                container.appendChild(colorEl);
+                container.appendChild(colourEl);
             });
         });
     }
