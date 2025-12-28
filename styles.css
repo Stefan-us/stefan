@@ -632,34 +632,6 @@ body {
     border-radius: 8px;
     border-left: 4px solid var(--blue-accent);
     box-shadow: var(--shadow-sm);
-    max-height: 500px;
-    overflow-y: auto;
-}
-
-#four-weeks-historical::-webkit-scrollbar,
-#four-months-historical::-webkit-scrollbar,
-#four-years-historical::-webkit-scrollbar {
-    width: 8px;
-}
-
-#four-weeks-historical::-webkit-scrollbar-track,
-#four-months-historical::-webkit-scrollbar-track,
-#four-years-historical::-webkit-scrollbar-track {
-    background: var(--soft-white);
-    border-radius: 4px;
-}
-
-#four-weeks-historical::-webkit-scrollbar-thumb,
-#four-months-historical::-webkit-scrollbar-thumb,
-#four-years-historical::-webkit-scrollbar-thumb {
-    background: var(--cream-white);
-    border-radius: 4px;
-}
-
-#four-weeks-historical::-webkit-scrollbar-thumb:hover,
-#four-months-historical::-webkit-scrollbar-thumb:hover,
-#four-years-historical::-webkit-scrollbar-thumb:hover {
-    background: #ede8cc;
 }
 
 .historical-goal-item {
