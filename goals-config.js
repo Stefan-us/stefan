@@ -53,64 +53,54 @@ const GOALS_CONFIG = {
     // Four Week Goals (Update every 4 weeks)
     fourWeeks: [
         {
-            text: "start maximizing potential at the gym",
-            date: "dec 1 - dec 31",
-            notes: "hit PRs, return to peak form"
+            text: "begin aggressive cut for improved physique",
+            date: "jan 1 - jan 31",
+            notes: "track macros, calorie deficit, healthy eating"
         },
         {
-            text: "consolidate relationships with people who care",
-            date: "dec 1 - dec 31",
-            notes: "meet up, bond, make effort"
+            text: "establish business foundation and content plan",
+            date: "jan 1 - jan 31",
+            notes: "accounts, finalise plan, draft videos"
         },
         {
-            text: "start business groundwork - research and plan",
-            date: "dec 1 - dec 31",
-            notes: "read, get ideas, direction"
+            text: "reduce casual swearing, use language intentionally",
+            date: "jan 1 - jan 31",
+            notes: "speak with purpose and effect"
         },
         {
-            text: "review and reflect on progress",
-            date: "dec 1 - dec 31",
-            notes: "assess where you are"
+            text: "review progress and goals weekly",
+            date: "jan 1 - jan 31",
+            notes: "reflect on this page regularly"
         },
         {
-            text: "prepare for christmas",
-            date: "dec 1 - dec 31",
-            notes: "buy presents for everyone"
+            text: "refine personal style and wardrobe choices",
+            date: "jan 1 - jan 31",
+            notes: "tweak look, perfect details"
         },
         {
-            text: "complete everything on to-do list",
-            date: "dec 1 - dec 31",
-            notes: "personal task tracking"
+            text: "read a book on personal development",
+            date: "jan 1 - jan 31",
+            notes: "focus on self confidence"
         },
         {
-            text: "create clothing and wardrobe plan",
-            date: "dec 1 - dec 31",
-            notes: "colors, style, build list"
+            text: "deepen relationship with God",
+            date: "jan 1 - jan 31",
+            notes: "prayer, reflection, gratitude"
         },
         {
-            text: "find suitable hairstyle",
-            date: "dec 1 - dec 31",
-            notes: "experiment, find what fits"
+            text: "reach 200 Greek vocabulary words",
+            date: "jan 1 - jan 31",
+            notes: "consistent daily practice"
         },
         {
-            text: "work towards goals and principles",
-            date: "dec 1 - dec 31",
-            notes: "consistent daily effort"
+            text: "attend social events and gatherings",
+            date: "jan 1 - jan 31",
+            notes: "push comfort zone, show up"
         },
         {
-            text: "focus on nutrition - eat more, cut junk",
-            date: "dec 1 - dec 31",
-            notes: "healthy eating habits"
-        },
-        {
-            text: "sort out budget and finances",
-            date: "dec 1 - dec 31",
-            notes: "payslips, in/out system"
-        },
-        {
-            text: "start reading a book on self-confidence",
-            date: "dec 1 - dec 31",
-            notes: "build foundation for charisma"
+            text: "excel at work with focused effort",
+            date: "jan 1 - jan 31",
+            notes: "maximum output, achieve targets"
         }
     ],
 

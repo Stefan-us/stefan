@@ -10,6 +10,9 @@ document.addEventListener('DOMContentLoaded', () => {
     setupChelseaEasterEgg();
     setupMariaEasterEgg();
     showView('home');
+
+    // Initialize December historical data (one time setup)
+    initializeDecemberHistory();
 });
 
 // Load principles from config
@@ -73,8 +76,8 @@ function loadLastUpdated() {
         dateInput.value = saved;
     } else {
         // Set default date (UK format: DD/MM/YYYY)
-        dateInput.value = '20 / 11 / 2025';
-        localStorage.setItem('lastUpdated', '20 / 11 / 2025');
+        dateInput.value = '01 / 01 / 2026';
+        localStorage.setItem('lastUpdated', '01 / 01 / 2026');
     }
 
     dateInput.addEventListener('change', () => {
@@ -334,6 +337,23 @@ function getHistoricalData(timeline) {
     const key = `historical_${timeline}`;
     const stored = localStorage.getItem(key);
     return stored ? JSON.parse(stored) : null;
+}
+
+// Initialize December historical data
+function initializeDecemberHistory() {
+    const key = 'historical_four-weeks';
+
+    // Only set if not already set (prevents overwriting)
+    if (!localStorage.getItem(key)) {
+        const decemberData = [
+            {
+                text: "december 1st to december 31st\n\n• start maximizing potential at the gym\n• consolidate relationships with people who care\n• start business groundwork – research and plan\n• review and reflect on progress\n• prepare for christmas\n• complete everything on to-do list\n• create clothing and wardrobe plan\n• find suitable hairstyle\n• work towards goals and principles\n• focus on nutrition – eat more, cut junk\n• sort out budget and finances\n• start reading a book on self-confidence",
+                date: "december 2025",
+                notes: "completed month"
+            }
+        ];
+        localStorage.setItem(key, JSON.stringify(decemberData));
+    }
 }
 
 // Load wardrobe data
