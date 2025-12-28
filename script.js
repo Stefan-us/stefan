@@ -333,7 +333,7 @@ function loadHistoricalData(timeline) {
         const header = document.createElement('div');
         header.className = 'historical-period-header';
         header.textContent = meta.period;
-        section.insertBefore(header, container.parentElement);
+        section.insertBefore(header, container);
     }
 
     if (!historicalData || historicalData.length === 0) {
