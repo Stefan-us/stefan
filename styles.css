@@ -194,7 +194,7 @@ body {
 }
 
 /* Goals Container */
-.goals-container {
+.goals-container:not(#four-weeks-historical):not(#four-months-historical):not(#four-years-historical) {
     display: grid;
     gap: 20px;
     margin-bottom: 24px;
@@ -613,6 +613,65 @@ body {
 
 .avoid-label {
     color: #CE2029;
+}
+
+/* Historical Data Styling */
+.historical-period-header {
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--text-primary);
+    margin-bottom: 20px;
+    letter-spacing: -0.3px;
+}
+
+#four-weeks-historical,
+#four-months-historical,
+#four-years-historical {
+    background: var(--pure-white);
+    padding: 30px;
+    border-radius: 8px;
+    border-left: 4px solid var(--blue-accent);
+    box-shadow: var(--shadow-sm);
+    max-height: 500px;
+    overflow-y: auto;
+}
+
+#four-weeks-historical::-webkit-scrollbar,
+#four-months-historical::-webkit-scrollbar,
+#four-years-historical::-webkit-scrollbar {
+    width: 8px;
+}
+
+#four-weeks-historical::-webkit-scrollbar-track,
+#four-months-historical::-webkit-scrollbar-track,
+#four-years-historical::-webkit-scrollbar-track {
+    background: var(--soft-white);
+    border-radius: 4px;
+}
+
+#four-weeks-historical::-webkit-scrollbar-thumb,
+#four-months-historical::-webkit-scrollbar-thumb,
+#four-years-historical::-webkit-scrollbar-thumb {
+    background: var(--cream-white);
+    border-radius: 4px;
+}
+
+#four-weeks-historical::-webkit-scrollbar-thumb:hover,
+#four-months-historical::-webkit-scrollbar-thumb:hover,
+#four-years-historical::-webkit-scrollbar-thumb:hover {
+    background: #ede8cc;
+}
+
+.historical-goal-item {
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border-light);
+    font-size: 15px;
+    color: var(--text-primary);
+    line-height: 1.5;
+}
+
+.historical-goal-item:last-child {
+    border-bottom: none;
 }
 
 /* View containers */

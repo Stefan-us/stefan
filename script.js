@@ -305,11 +305,31 @@ function showView(viewName) {
 // Load historical data for a timeline
 function loadHistoricalData(timeline) {
     const historicalData = getHistoricalData(timeline);
-    const container = document.getElementById(`${timeline}-historical`);
+    const metaKey = `historical_${timeline}_meta`;
+    const metadata = localStorage.getItem(metaKey);
+    const meta = metadata ? JSON.parse(metadata) : null;
 
+    const container = document.getElementById(`${timeline}-historical`);
     if (!container) return;
 
+    // Remove any existing period header
+    const section = container.closest('.timeline-section');
+    if (section) {
+        const existingHeader = section.querySelector('.historical-period-header');
+        if (existingHeader) {
+            existingHeader.remove();
+        }
+    }
+
     container.innerHTML = '';
+
+    // Add period header if metadata exists
+    if (meta && meta.period && section) {
+        const header = document.createElement('div');
+        header.className = 'historical-period-header';
+        header.textContent = meta.period;
+        section.insertBefore(header, container.parentElement);
+    }
 
     if (!historicalData || historicalData.length === 0) {
         // Show empty state
@@ -324,10 +344,12 @@ function loadHistoricalData(timeline) {
             </div>
         `;
     } else {
-        // Load historical goals
-        historicalData.forEach(goal => {
-            const row = createGoalRow(goal.text, goal.date, goal.notes);
-            container.appendChild(row);
+        // Load historical goals in compact format
+        historicalData.forEach(item => {
+            const goalItem = document.createElement('div');
+            goalItem.className = 'historical-goal-item';
+            goalItem.textContent = item.goal;
+            container.appendChild(goalItem);
         });
     }
 }
@@ -339,20 +361,35 @@ function getHistoricalData(timeline) {
     return stored ? JSON.parse(stored) : null;
 }
 
-// Initialize December historical data
+// Initialise December historical data
 function initializeDecemberHistory() {
     const key = 'historical_four-weeks';
+    const metaKey = 'historical_four-weeks_meta';
 
     // Only set if not already set (prevents overwriting)
     if (!localStorage.getItem(key)) {
         const decemberData = [
-            {
-                text: "december 1st to december 31st\n\n• start maximizing potential at the gym\n• consolidate relationships with people who care\n• start business groundwork – research and plan\n• review and reflect on progress\n• prepare for christmas\n• complete everything on to-do list\n• create clothing and wardrobe plan\n• find suitable hairstyle\n• work towards goals and principles\n• focus on nutrition – eat more, cut junk\n• sort out budget and finances\n• start reading a book on self-confidence",
-                date: "december 2025",
-                notes: "completed month"
-            }
+            { goal: "start maximising potential at the gym" },
+            { goal: "consolidate relationships with people who care" },
+            { goal: "start business groundwork – research and plan" },
+            { goal: "review and reflect on progress" },
+            { goal: "prepare for christmas" },
+            { goal: "complete everything on to-do list" },
+            { goal: "create clothing and wardrobe plan" },
+            { goal: "find suitable hairstyle" },
+            { goal: "work towards goals and principles" },
+            { goal: "focus on nutrition – eat more, cut junk" },
+            { goal: "sort out budget and finances" },
+            { goal: "start reading a book on self-confidence" }
         ];
+
+        const metadata = {
+            period: "december 1st to december 31st",
+            year: "2025"
+        };
+
         localStorage.setItem(key, JSON.stringify(decemberData));
+        localStorage.setItem(metaKey, JSON.stringify(metadata));
     }
 }
 
