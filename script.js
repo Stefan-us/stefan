@@ -304,6 +304,11 @@ function showView(viewName) {
 
 // Load historical data for a timeline
 function loadHistoricalData(timeline) {
+    // Ensure December data is initialized for four-weeks timeline
+    if (timeline === 'four-weeks') {
+        initializeDecemberHistory();
+    }
+
     const historicalData = getHistoricalData(timeline);
     const metaKey = `historical_${timeline}_meta`;
     const metadata = localStorage.getItem(metaKey);
