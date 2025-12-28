@@ -366,31 +366,29 @@ function initializeDecemberHistory() {
     const key = 'historical_four-weeks';
     const metaKey = 'historical_four-weeks_meta';
 
-    // Only set if not already set (prevents overwriting)
-    if (!localStorage.getItem(key)) {
-        const decemberData = [
-            { goal: "start maximising potential at the gym" },
-            { goal: "consolidate relationships with people who care" },
-            { goal: "start business groundwork – research and plan" },
-            { goal: "review and reflect on progress" },
-            { goal: "prepare for christmas" },
-            { goal: "complete everything on to-do list" },
-            { goal: "create clothing and wardrobe plan" },
-            { goal: "find suitable hairstyle" },
-            { goal: "work towards goals and principles" },
-            { goal: "focus on nutrition – eat more, cut junk" },
-            { goal: "sort out budget and finances" },
-            { goal: "start reading a book on self-confidence" }
-        ];
+    // Always set December data (ensures it's always available)
+    const decemberData = [
+        { goal: "start maximising potential at the gym" },
+        { goal: "consolidate relationships with people who care" },
+        { goal: "start business groundwork – research and plan" },
+        { goal: "review and reflect on progress" },
+        { goal: "prepare for christmas" },
+        { goal: "complete everything on to-do list" },
+        { goal: "create clothing and wardrobe plan" },
+        { goal: "find suitable hairstyle" },
+        { goal: "work towards goals and principles" },
+        { goal: "focus on nutrition – eat more, cut junk" },
+        { goal: "sort out budget and finances" },
+        { goal: "start reading a book on self-confidence" }
+    ];
 
-        const metadata = {
-            period: "december 1st to december 31st",
-            year: "2025"
-        };
+    const metadata = {
+        period: "december 1st to december 31st",
+        year: "2025"
+    };
 
-        localStorage.setItem(key, JSON.stringify(decemberData));
-        localStorage.setItem(metaKey, JSON.stringify(metadata));
-    }
+    localStorage.setItem(key, JSON.stringify(decemberData));
+    localStorage.setItem(metaKey, JSON.stringify(metadata));
 }
 
 // Load wardrobe data
